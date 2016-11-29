@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example MP4: WC and Viewport Manipulations</title>
+        <link rel ="icon" type ="image/x-icon" href="./assets/favicon.png">
+        <link rel="stylesheet" href="src/styles.css">
+
+        <!-- the following says there are javascript source code contained in 
+             the external source files
+        -->
+        <!-- external library -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script type="text/javascript" src="src/lib/gl-matrix.js"></script>
+        <script type="text/javascript" src="src/lib/webgl-obj-loader.js"></script>
+
+        <!-- Engine code: Graphics Support -->
+        <!-- Core of Engine -->
+        <script type="text/javascript" src="src/Engine/Core/Engine_Core.js"></script>
+        <script type="text/javascript" src="src/Engine/Core/Engine_VertexBuffer.js"></script>
+        <script type="text/javascript" src="src/Engine/Core/Engine_MouseSupport.js"></script>
+        <script type="text/javascript" src="src/Engine/SimpleShader.js"></script>
+        <script type="text/javascript" src="src/Engine/Renderable/Renderable.js"></script>
+        <script type="text/javascript" src="src/Engine/Renderable/SquareRenderable.js"></script>
+        <script type="text/javascript" src="src/Engine/Renderable/MeshRenderable.js"></script>
+        <script type="text/javascript" src="src/Engine/Renderable/SceneNode.js"></script>
+        <script type="text/javascript" src="src/Engine/Transform/Transform.js"></script>
+        <script type="text/javascript" src="src/Engine/Transform/PivotedTransform.js"></script>
+        <script type="text/javascript" src="src/Engine/Camera/Camera.js"></script>
+        <script type="text/javascript" src="src/Engine/Camera/Camera_Mouse.js"></script>
+
+        <!-- GUI Lib -->
+        <script type="text/javascript" src="src/GUI/CSS450Timer.js"></script>
+        <script type="text/javascript" src="src/GUI/CSS450Slider.js"></script>
+        <script type="text/javascript" src="src/GUI/CSS450Xform.js"></script>
+        <script type="text/javascript" src="src/GUI/CanvasMouseSupport.js"></script>
+        
+        <!-- My application code -->
+        <script type="text/javascript" src="src/MainController.js"></script> 
+        <script type="text/javascript" src="src/App/ClassExample.js"></script> 
+        <script type="text/javascript" src="src/App/ClassExample_CurrentObject.js"></script> 
+        <script type="text/javascript" src="src/App/SquareArea.js"></script> 
+        <script type="text/javascript" src="src/App/ViewManipulator.js"></script> 
+        <script type="text/javascript" src="src/App/ViewManipulator_ManipMode.js"></script> 
+        <script type="text/javascript" src="src/App/ViewManipulator_ViewportSupport.js"></script> 
+    </head>
+
+    <body
+         ng-app="appMyExample" 
+         ng-controller="MainCtrl">
+        
+    <css-timer id="idMainControllerTimer"
+               interval="40"
+               timeron="true"
+               callback="mainTimerHandler"></css-timer>
+        
+    <div class="left-column">
+        <canvas 
+            ng-mousemove="serviceMove($event)"
+            ng-mousedown="serviceClick($event)"
+            ng-mouseup="serviceRelease($event)"
+            id="GLCanvas" width="600" height="600">
+            Your browser does not support the HTML5 canvas.
+        </canvas>
+    </div>
+    <div class="right-column">
+        <div style="border: 1px solid #ff0000; display: inline-block">
+            <b>Small View Control</b>
+            <hr>
+            World Coordinate:<br>
+            <css-slider model="mSmallViewWCWidth" min="1" max="800" 
+                    label="Width" 
+                    callback="setSmallViewWC"></css-slider>
+            <br>
+            <css-slider model="mSmallViewWCCenter[0]" min="-100" max="100" 
+                    label="CX" callback="setSmallViewWCCenter"></css-slider>
+            <css-slider model="mSmallViewWCCenter[1]" min="-100" max="100" 
+                    label="CY" callback="setSmallViewWCCenter"></css-slider>
+            <hr>
+            Viewport<br>
+            <css-slider model="mSmallViewport[0]" min="1" max="800" 
+                    label="Left" callback="setSmallViewport"></css-slider>
+            <css-slider model="mSmallViewport[1]" min="1" max="800" 
+                    label="Bottom" callback="setSmallViewport"></css-slider> 
+            <br>
+            <css-slider model="mSmallViewport[2]" min="1" max="800" 
+                    label="Width" callback="setSmallViewport"></css-slider>
+            <css-slider model="mSmallViewport[3]" min="1" max="800" 
+                    label="Height" callback="setSmallViewport"></css-slider>
+        </div>
+        <div style="border: 1px solid #6600ff; display: inline-block">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Client:<input type="text" ng-model="mClientX" size=4>, <input type="text" ng-model="mClientY" size=4><br>
+            &nbsp;&nbsp;&nbsp;Canvas:<input type="text" ng-model="mCanvasX" size=4>, <input type="text" ng-model="mCanvasY" size=4><br>
+            Viewport:<input type="text" ng-model="mViewportX" size=4>, <input type="text" ng-model="mViewportY" size=4><br>
+            <hr>
+            &nbsp;&nbsp;Camera:<input type="text" ng-model="mWhichCamera" size=8><br>
+            &nbsp;&nbsp;Camera:<input type="text" ng-model="mCameraX" size=4>, <input type="text" ng-model="mCameraY" size=4><br>
+        </div>
+    </div>
+                   
+    </body>
+</html>
