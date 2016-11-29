@@ -128,10 +128,10 @@ myModule.controller("MainCtrl", function ($scope) {
             $scope.mWhichCamera = "Bottom Right";
         }
         
-        if ($scope.mSmallView.isMouseInViewport($scope.mCanvasX, $scope.mCanvasY)) {
-            useCam = $scope.mSmallView;
-            $scope.mWhichCamera = "Small";
-        }
+//        if ($scope.mSmallView.isMouseInViewport($scope.mCanvasX, $scope.mCanvasY)) {
+//            useCam = $scope.mSmallView;
+//            $scope.mWhichCamera = "Small";
+//        }
         
         // these are "private functions" on the camera, 
         // for the purpose of clear illustration, we will call them
@@ -158,11 +158,11 @@ myModule.controller("MainCtrl", function ($scope) {
         if (event.which === 1) {
             var wcPos;
             var wcPos = $scope.computeWCPos(event);
-            if (this.mSmallViewControl.isInManipMode()) {
-                this.mSmallViewControl.updateManipulation($scope, wcPos);
-            } else {
+//            if (this.mSmallViewControl.isInManipMode()) {
+//                this.mSmallViewControl.updateManipulation($scope, wcPos);
+//            } else {
                 $scope.mMyWorld.defineWidth(wcPos);
-            }
+//            }
     
         }
     };
@@ -171,10 +171,10 @@ myModule.controller("MainCtrl", function ($scope) {
         if (event.which === 1) {
             var wcPos;
             var wcPos = $scope.computeWCPos(event);
-            if (this.mSmallViewControl.isInManipMode()) {
-                this.mSmallViewControl.updateManipulation($scope, wcPos);
-                this.mSmallViewControl.exitManipMode();
-            }
+//            if (this.mSmallViewControl.isInManipMode()) {
+//                this.mSmallViewControl.updateManipulation($scope, wcPos);
+//                this.mSmallViewControl.exitManipMode();
+//            }
         }
     };
 
