@@ -8,19 +8,14 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";
-
-function Camera(wcCenter, wcWidth, viewportArray, type) {
+                                                   // degrees
+function Camera(wcCenter, wcWidth, viewportArray, rotationAngle, flipHorizontally) {
     this.mWCCenter = wcCenter;
     
-    switch(type){
-        case 2:
-            this.mWCWidth = -1 * wcWidth;
-            break;
-        case 3:
-            this.mWCWidth = -1 * wcWidth;
-            break;
-        default:
-            this.mWCWidth = wcWidth;
+    if (flipHorizontally) {
+        this.mWCWidth = -1 * wcWidth;
+    } else {
+        this.mWCWidth = wcWidth;
     }
     
     this.mNearPlane = 0;
@@ -36,7 +31,8 @@ function Camera(wcCenter, wcWidth, viewportArray, type) {
     this.mBgColor = [0.8, 0.8, 0.8, 1]; // RGB and Alpha
     
     //Type (0: Unchanged, 1: Flipped about horizontal axis, 2: Flipped about vertical axis, 3: rotated 180)
-    this.type = type;
+    this.mFlipHorizontally = flipHorizontally;
+    this.mRotationAngle = rotationAngle;
 }
 
 // <editor-fold desc="Public Methods">
@@ -118,19 +114,23 @@ Camera.prototype.setupViewProjection = function () {
 
 
     //this.wcHeight = this.mWCWidth  * this.mViewport[3] / this.mViewport[2]; // viewportH/viewportW
-    switch(this.type){
-        case 1:
-            this.wcHeight = -1 * this.mWCWidth  * this.mViewport[3] / this.mViewport[2];
-            break;
-        case 2:
-            this.wcHeight = -1 * this.mWCWidth  * this.mViewport[3] / this.mViewport[2];
-            break;
-        default:
-            this.wcHeight = this.mWCWidth  * this.mViewport[3] / this.mViewport[2]; // viewportH/viewportW
-    }
+    this.mWCHeight = this.mWCWidth  * this.mViewport[3] / this.mViewport[2];
+    
+    if (this.mFlipHorizontally) this.mWCHeight *= -1;
+//    switch(this.mType){
+//        case 1:
+//            this.wcHeight = -1 * this.mWCWidth  * this.mViewport[3] / this.mViewport[2];
+//            break;
+//        case 2:
+//            this.wcHeight = -1 * this.mWCWidth  * this.mViewport[3] / this.mViewport[2];
+//            break;
+//        default:
+//            this.wcHeight = this.mWCWidth  * this.mViewport[3] / this.mViewport[2]; // viewportH/viewportW
+//    }
     
     mat4.identity(this.mVPMatrix);
-    mat4.scale(this.mVPMatrix, this.mVPMatrix, [2 / this.mWCWidth, 2 / this.wcHeight, 1]);
+    mat4.scale(this.mVPMatrix, this.mVPMatrix, [2 / this.mWCWidth, 2 / this.mWCHeight, 1]);
+    mat4.rotate(this.mVPMatrix, this.mVPMatrix, this.mRotationAngle * Math.PI / 180, [0, 0, 1]);
     mat4.translate(this.mVPMatrix, this.mVPMatrix, [-this.mWCCenter[0], -this.mWCCenter[1], 0]);
 
     //</editor-fold>

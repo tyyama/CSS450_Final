@@ -42,25 +42,25 @@ myModule.controller("MainCtrl", function ($scope) {
                 $scope.mViewWCCenter,         // wc Center
                 $scope.mViewWCWidth,                // wc Width
                 [0, 300, 300, 300], // viewport: left, bottom, width, height
-                0); 
+                0, false); 
                 
     $scope.mTopRightView = new Camera(
                 $scope.mViewWCCenter,         // wc Center
                 $scope.mViewWCWidth,                // wc Width
                 [300, 300, 300, 300], // viewport: left, bottom, width, height
-                2);
+                0, true);
                 
     $scope.mBottomLeftView = new Camera(
                 $scope.mViewWCCenter,         // wc Center
                 $scope.mViewWCWidth,                // wc Width
                 [0, 0, 300, 300], // viewport: left, bottom, width, height
-                1);  
+                180, true);  
                 
     $scope.mBottomRightView = new Camera(
                 $scope.mViewWCCenter,         // wc Center
                 $scope.mViewWCWidth,                // wc Width
                 [300, 0, 300, 300], // viewport: left, bottom, width, height
-                3);
+                180, false);
             
     // small view support
     $scope.setSmallViewWC = function () {
