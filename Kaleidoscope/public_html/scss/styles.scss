@@ -1,0 +1,97 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 1, 2016, 7:18:20 PM
+    Author     : sawyer
+*/
+
+$primary-color: #00C853;
+$page-background-color: #fafafa;
+$page-text-color: #222;
+$border-height: 3rem;
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    
+    display: flex;
+    flex-direction: column;
+    background: $page-background-color;
+    color: $page-text-color;
+}
+
+header {
+    height: $border-height;
+    background: $primary-color;
+    display: flex;
+    
+    .icon {
+        height: $border-height;
+        width: $border-height;
+        background: blue;
+    }
+    
+    h1 {
+        flex: 1;
+        line-height: $border-height;
+        margin: 0;
+    }
+}
+
+header, footer {
+    padding-left: $border-height;
+    padding-right: $border-height;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    
+    canvas {
+        background: red;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .large {
+        flex: 1;
+    }
+    
+    aside {
+        display: flex;
+        flex-direction: column;
+        width: 20rem;
+        
+        .controls {
+            flex: 1;
+        }
+        
+        .small {
+            height: 20rem;
+        }
+    }
+}
+
+footer {
+    height: $border-height;
+    background: $primary-color;
+    
+    p {
+        color: #444;
+        text-align: center;
+        font-size: .8rem;
+        line-height: $border-height;
+        margin: 0;
+    }
+}

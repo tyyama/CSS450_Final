@@ -1,0 +1,82 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 1, 2016, 7:18:20 PM
+    Author     : sawyer
+*/
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000316}}
+*, *:before, *:after {
+  box-sizing: border-box; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000320}}
+body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  color: #222222; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000333}}
+header {
+  height: 3rem;
+  background: #00c853;
+  display: flex; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000338}}
+  header .icon {
+    height: 3rem;
+    width: 3rem;
+    background: blue; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000344}}
+  header h1 {
+    flex: 1;
+    line-height: 3rem;
+    margin: 0; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000351}}
+header, footer {
+  padding-left: 3rem;
+  padding-right: 3rem; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000356}}
+.content {
+  flex: 1;
+  display: flex; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000360}}
+  .content canvas {
+    background: red;
+    display: block;
+    width: 100%;
+    height: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000367}}
+  .content .large {
+    flex: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000371}}
+  .content aside {
+    display: flex;
+    flex-direction: column;
+    width: 20rem; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000376}}
+    .content aside .controls {
+      flex: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000380}}
+    .content aside .small {
+      height: 20rem; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000386}}
+footer {
+  height: 3rem;
+  background: #00c853; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000390}}
+  footer p {
+    color: #444;
+    text-align: center;
+    font-size: .8rem;
+    line-height: 3rem;
+    margin: 0; }
