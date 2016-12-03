@@ -8,13 +8,19 @@ and open the template in the editor.
     Author     : sawyer
 */
 
-$primary-color: #00C853;
+$primary-color: #212121;
 $page-background-color: #fafafa;
 $page-text-color: #222;
 $border-height: 3rem;
+$sidebar-width: 25rem;
 
 *, *:before, *:after {
     box-sizing: border-box;
+}
+
+html {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
 }
 
 body {
@@ -34,6 +40,7 @@ header {
     height: $border-height;
     background: $primary-color;
     display: flex;
+    color: #fafafa;
     
     .icon {
         height: $border-height;
@@ -66,15 +73,22 @@ header, footer {
     
     .large {
         flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     aside {
+        flex: 0 0 $sidebar-width;
+        max-width: $sidebar-width;
         display: flex;
         flex-direction: column;
-        width: 20rem;
+        background: #eee;
+        box-shadow: -2px 0 4px rgba(black, .2);
         
         .controls {
             flex: 1;
+            border-bottom: 4px solid darken(white, 40);
         }
         
         .small {
@@ -88,10 +102,58 @@ footer {
     background: $primary-color;
     
     p {
-        color: #444;
+        color: #777;
         text-align: center;
         font-size: .8rem;
         line-height: $border-height;
         margin: 0;
+    }
+}
+
+// Directive styles
+
+xform {
+    padding: 1rem;
+    
+    .modes {
+        display: flex;
+        
+        label {
+            flex: 1;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            
+            input {
+                margin-left: .5rem;
+            }
+        }
+    }
+    
+    slider {
+        margin-bottom: .5rem;
+    }
+}
+
+slider {
+    display: flex;
+    align-items: center;
+    
+    > * {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
+    p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    input[type="range"] {
+        flex: 1;
+    }
+    
+    input[type="text"] {
+        width: 3.5rem;
     }
 }

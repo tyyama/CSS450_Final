@@ -8,30 +8,47 @@ and open the template in the editor.
     <head>
         <title>Kaleidoscope</title>
         
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        
         <link rel="stylesheet" href="css/normalize.css"/>
         <link rel="stylesheet" href="css/styles.css"/>
         
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- external library -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script type="text/javascript" src="src/lib/gl-matrix.js"></script>
+        <script type="text/javascript" src="src/lib/webgl-obj-loader.js"></script>
+        
+        <!-- GUI Lib -->
+        <script type="text/javascript" src="src/GUI/KaleidoscopeSlider.js"></script>
+        <script type="text/javascript" src="src/GUI/KaleidoscopeXform.js"></script>
+        
+        <!-- My application code -->
+        <script type="text/javascript" src="src/MainController.js"></script> 
+        
     </head>
-    <body>
+    <body ng-app="kaleidoscope" ng-controller="MainCtrl">
         <header>
             <h1>Kaleidoscope Editor</h1>
-            <div class="icon share"></div>
+            <!--<div class="icon share"></div>-->
         </header>
         
         <div class="content">
             
-            <div class="large">
+            <div id="GLCanvas_Large_Container" class="large">
                 <canvas id="GLCanvas_Large"
                         width="600"
-                        height="400">
+                        height="600">
                     Your browser does not support WebGL!
-                </canvas>
+                </canvas>           
             </div>
             
-            <aside>
-                <div class="controls"></div>
+            <aside id="sidebar">
+                <div class="controls">
+                    <xform></xform>
+                </div>
                 <div class="small">
                     <canvas id="GLCanvas_Small"
                             width="300"
@@ -45,5 +62,7 @@ and open the template in the editor.
         <footer>
             <p>Copyright &copy; 2016 Sawyer Knoblich and Tyler Yamamoto, please don't steal our code.</p>
         </footer>
+        
+        <script src="js/canvasSize.js"></script>
     </body>
 </html>

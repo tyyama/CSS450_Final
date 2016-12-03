@@ -7,11 +7,13 @@ and open the template in the editor.
     Created on : Dec 1, 2016, 7:18:20 PM
     Author     : sawyer
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000316}}
 *, *:before, *:after {
   box-sizing: border-box; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000320}}
+html {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px; }
+
 body {
   position: fixed;
   top: 0;
@@ -21,62 +23,88 @@ body {
   display: flex;
   flex-direction: column;
   background: #fafafa;
-  color: #222222; }
+  color: #222; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000333}}
 header {
   height: 3rem;
-  background: #00c853;
-  display: flex; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000338}}
+  background: #212121;
+  display: flex;
+  color: #fafafa; }
   header .icon {
     height: 3rem;
     width: 3rem;
     background: blue; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000344}}
   header h1 {
     flex: 1;
     line-height: 3rem;
     margin: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000351}}
 header, footer {
   padding-left: 3rem;
   padding-right: 3rem; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000356}}
 .content {
   flex: 1;
   display: flex; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000360}}
   .content canvas {
     background: red;
     display: block;
     width: 100%;
     height: 100%; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000367}}
   .content .large {
-    flex: 1; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000371}}
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
   .content aside {
+    flex: 0 0 25rem;
+    max-width: 25rem;
     display: flex;
     flex-direction: column;
-    width: 20rem; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000376}}
+    background: #eee;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.2); }
     .content aside .controls {
-      flex: 1; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000380}}
+      flex: 1;
+      border-bottom: 4px solid #999999; }
     .content aside .small {
       height: 20rem; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000386}}
 footer {
   height: 3rem;
-  background: #00c853; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/sawyer\/NetBeansProjects\/Kaleidoscope\/public_html\/scss\/styles\.scss}line{font-family:\0000390}}
+  background: #212121; }
   footer p {
-    color: #444;
+    color: #777;
     text-align: center;
     font-size: .8rem;
     line-height: 3rem;
     margin: 0; }
+
+xform {
+  padding: 1rem; }
+  xform .modes {
+    display: flex; }
+    xform .modes label {
+      flex: 1;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center; }
+      xform .modes label input {
+        margin-left: .5rem; }
+  xform slider {
+    margin-bottom: .5rem; }
+
+slider {
+  display: flex;
+  align-items: center; }
+  slider > * {
+    margin-left: 1rem;
+    margin-right: 1rem; }
+  slider p {
+    margin-top: 0;
+    margin-bottom: 0; }
+  slider input[type="range"] {
+    flex: 1; }
+  slider input[type="text"] {
+    width: 3.5rem; }
+
+/*# sourceMappingURL=styles.css.map */
