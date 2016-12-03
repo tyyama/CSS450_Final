@@ -48,9 +48,9 @@ header, footer {
   display: flex; }
   .content canvas {
     background: red;
-    display: block;
-    width: 100%;
-    height: 100%; }
+    /*        display: block;
+            width: 100%;
+            height: 100%;*/ }
   .content .large {
     flex: 1;
     display: flex;
@@ -65,9 +65,9 @@ header, footer {
     box-shadow: -2px 0 4px rgba(0, 0, 0, 0.2); }
     .content aside .controls {
       flex: 1;
-      border-bottom: 4px solid #999999; }
+      /*border-bottom: 4px solid darken(white, 40);*/ }
     .content aside .small {
-      height: 20rem; }
+      height: 25rem; }
 
 footer {
   height: 3rem;

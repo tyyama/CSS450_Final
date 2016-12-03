@@ -7,21 +7,33 @@
 
 var largeCanvasContainer = null;
 var largeCanvas = null;
+var smallCanvas = null;
 var sidebar = null;
 
 function handleResize() {
-    if (!largeCanvasContainer || !largeCanvas || !sidebar) {
+    if (!largeCanvasContainer || !largeCanvas || !smallCanvas || !sidebar) {
         largeCanvasContainer = document.getElementById('GLCanvas_Large_Container');
         largeCanvas = document.getElementById('GLCanvas_Large');
+        smallCanvas = document.getElementById('GLCanvas_Small');
         sidebar = document.getElementById('sidebar');
     }
     
-    var height = largeCanvasContainer.clientHeight;
+    
     var width = window.innerWidth - sidebar.clientWidth;
+    var height = largeCanvasContainer.clientHeight;
     var size = Math.min(width, height);
     
-    largeCanvas.style.width = size + 'px';
-    largeCanvas.style.height = size + 'px';
+    if (largeCanvas.width !== size || largeCanvas.height !== size) {
+        largeCanvas.width = size;
+        largeCanvas.height = size;
+    }
+    
+    var size = sidebar.clientWidth;
+    
+    if (smallCanvas.width !== size || smallCanvas.height !== size) {
+        smallCanvas.width = size;
+        smallCanvas.height = size;
+    }
 }
 
 window.onload = function() {

@@ -66,9 +66,9 @@ header, footer {
     
     canvas {
         background: red;
-        display: block;
+/*        display: block;
         width: 100%;
-        height: 100%;
+        height: 100%;*/
     }
     
     .large {
@@ -88,11 +88,11 @@ header, footer {
         
         .controls {
             flex: 1;
-            border-bottom: 4px solid darken(white, 40);
+            /*border-bottom: 4px solid darken(white, 40);*/
         }
         
         .small {
-            height: 20rem;
+            height: $sidebar-width;
         }
     }
 }

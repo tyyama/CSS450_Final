@@ -6,7 +6,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Kaleidoscope</title>
+        <title>Kaleidoscope Editor</title>
+        <link rel ="icon" type ="image/x-icon" href="./assets/favicon.png">
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         
@@ -21,15 +22,44 @@ and open the template in the editor.
         <script type="text/javascript" src="src/lib/gl-matrix.js"></script>
         <script type="text/javascript" src="src/lib/webgl-obj-loader.js"></script>
         
+        <!-- Core of Engine -->
+        <script type="text/javascript" src="src/Engine/Core/Engine_Core.js"></script>
+        <script type="text/javascript" src="src/Engine/Core/Engine_VertexBuffer.js"></script>
+        <script type="text/javascript" src="src/Engine/Core/Engine_MouseSupport.js"></script>
+        <script type="text/javascript" src="src/Engine/SimpleShader.js"></script>
+        <script type="text/javascript" src="src/Engine/Renderable/Renderable.js"></script>
+        <script type="text/javascript" src="src/Engine/Renderable/SquareRenderable.js"></script>
+        <script type="text/javascript" src="src/Engine/Renderable/MeshRenderable.js"></script>
+        <script type="text/javascript" src="src/Engine/Renderable/SceneNode.js"></script>
+        <script type="text/javascript" src="src/Engine/Transform/Transform.js"></script>
+        <script type="text/javascript" src="src/Engine/Transform/PivotedTransform.js"></script>
+        <script type="text/javascript" src="src/Engine/Camera/Camera.js"></script>
+        <script type="text/javascript" src="src/Engine/Camera/Camera_Mouse.js"></script>
+        
         <!-- GUI Lib -->
+        <script type="text/javascript" src="src/GUI/CSS450Timer.js"></script>
         <script type="text/javascript" src="src/GUI/KaleidoscopeSlider.js"></script>
         <script type="text/javascript" src="src/GUI/KaleidoscopeXform.js"></script>
+        <script type="text/javascript" src="src/GUI/CanvasMouseSupport.js"></script>
         
         <!-- My application code -->
+        <script type="text/javascript" src="src/App/ClassExample.js"></script>
+        <script type="text/javascript" src="src/App/ClassExample_MouseOver.js"></script> 
+        <script type="text/javascript" src="src/App/Manipulator.js"></script> 
+        <script type="text/javascript" src="src/App/Manipulator_Mode.js"></script> 
+        <script type="text/javascript" src="src/App/Bound.js"></script> 
+        <script type="text/javascript" src="src/App/ArmSegment.js"></script>
+        <script type="text/javascript" src="src/App/BodyWithArms.js"></script>
+        <script type="text/javascript" src="src/App/BodyWithArms_Select.js"></script>
         <script type="text/javascript" src="src/MainController.js"></script> 
         
     </head>
     <body ng-app="kaleidoscope" ng-controller="MainCtrl">
+        <css-timer id="idMainControllerTimer"
+               interval="40"
+               timeron="true"
+               callback="mainTimerHandler"></css-timer>
+    
         <header>
             <h1>Kaleidoscope Editor</h1>
             <!--<div class="icon share"></div>-->
@@ -41,19 +71,19 @@ and open the template in the editor.
                 <canvas id="GLCanvas_Large"
                         width="600"
                         height="600">
-                    Your browser does not support WebGL!
+                    Your browser does not support the HTML5 canvas.
                 </canvas>           
             </div>
             
             <aside id="sidebar">
                 <div class="controls">
-                    <xform></xform>
+                    <xform model="mSelectedXform"></xform>
                 </div>
                 <div class="small">
                     <canvas id="GLCanvas_Small"
-                            width="300"
+                            width="200"
                             height="200">
-                        Your browser does not support WebGL!
+                        Your browser does not support the HTML5 canvas.
                     </canvas>
                 </div>
             </aside>
@@ -63,6 +93,6 @@ and open the template in the editor.
             <p>Copyright &copy; 2016 Sawyer Knoblich and Tyler Yamamoto, please don't steal our code.</p>
         </footer>
         
-        <script src="js/canvasSize.js"></script>
+        <!--<script src="js/canvasSize.js"></script>-->
     </body>
 </html>

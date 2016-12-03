@@ -40,7 +40,7 @@ angular.module('XformModule', ['SliderModule'])
                 `,
         
                 scope: {
-                    
+                    mXform: "=model"
                 },
                 
                 controller: function($scope) {
@@ -75,22 +75,28 @@ angular.module('XformModule', ['SliderModule'])
                     $scope.mValue = 10;
                     
                     $scope.$watch('mSelectedMode', function(newValue, oldValue) {
+                        if (!angular.isDefined($scope.mXform)) return;
+                        
                         var mode = $scope.mModes[$scope.mSelectedMode];
                         switch (mode) {
                             case 'Translate':
-                                $scope.mSliders['X'] = $scope.dummyData['translate'][0];
-                                $scope.mSliders['Y'] = $scope.dummyData['translate'][1];
+                                var pos = $scope.mXform.getPosition();
+                                $scope.mSliders['X'] = pos[0];
+                                $scope.mSliders['Y'] = pos[1];
                                 break;
                             case 'Rotate':
-                                $scope.mSliders['Angle'] = $scope.dummyData['rotate'];
+                                var rot = $scope.mXform.getRotationInDegree();
+                                $scope.mSliders['Angle'] = rot;
                                 break;
                             case 'Scale':
-                                $scope.mSliders['X'] = $scope.dummyData['scale'][0];
-                                $scope.mSliders['Y'] = $scope.dummyData['scale'][1];
+                                var scale = $scope.mXform.getSize();
+                                $scope.mSliders['X'] = scale[0];
+                                $scope.mSliders['Y'] = scale[1];
                                 break;
                             case 'Pivot':
-                                $scope.mSliders['X'] = $scope.dummyData['pivot'][0];
-                                $scope.mSliders['Y'] = $scope.dummyData['pivot'][1];
+                                var pivot = $scope.mXform.getPivot();
+                                $scope.mSliders['X'] = pivot[0];
+                                $scope.mSliders['Y'] = pivot[1];
                                 break;
                         }
                            
@@ -111,22 +117,21 @@ angular.module('XformModule', ['SliderModule'])
                     });
                     
                     $scope.handleUpdate = function() {
+                        if (!angular.isDefined($scope.mXform)) return;
+                        
                         var mode = $scope.mModes[$scope.mSelectedMode];
                         switch (mode) {
                             case 'Translate':
-                                $scope.dummyData['translate'][0] = $scope.mSliders['X'];
-                                $scope.dummyData['translate'][1] = $scope.mSliders['Y'];
+                                $scope.mXform.setPosition($scope.mSliders['X'], $scope.mSliders['Y']);
                                 break;
                             case 'Rotate':
-                                $scope.dummyData['rotate'] = $scope.mSliders['Angle'];
+                                $scope.mXform.setRotationInDegree($scope.mSliders['Angle']);
                                 break;
                             case 'Scale':
-                                $scope.dummyData['scale'][0] = $scope.mSliders['X'];
-                                $scope.dummyData['scale'][1] = $scope.mSliders['Y'];
+                                $scope.mXform.setSize($scope.mSliders['X'], $scope.mSliders['Y']);
                                 break;
                             case 'Pivot':
-                                $scope.dummyData['pivot'][0] = $scope.mSliders['X'];
-                                $scope.dummyData['pivot'][1] = $scope.mSliders['Y'];
+                                $scope.mXform.setPivot($scope.mSliders['X'], $scope.mSliders['Y']);
                                 break;
                         }
                     };
