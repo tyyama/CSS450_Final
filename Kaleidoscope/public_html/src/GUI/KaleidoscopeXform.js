@@ -81,22 +81,22 @@ angular.module('XformModule', ['SliderModule'])
                         switch (mode) {
                             case 'Translate':
                                 var pos = $scope.mXform.getPosition();
-                                $scope.mSliders['X'] = pos[0];
-                                $scope.mSliders['Y'] = pos[1];
+                                $scope.mSliders['X'] = parseFloat(pos[0]).toFixed(1);
+                                $scope.mSliders['Y'] = parseFloat(pos[1]).toFixed(1);
                                 break;
                             case 'Rotate':
                                 var rot = $scope.mXform.getRotationInDegree();
-                                $scope.mSliders['Angle'] = rot;
+                                $scope.mSliders['Angle'] = parseFloat(rot).toFixed(1);
                                 break;
                             case 'Scale':
                                 var scale = $scope.mXform.getSize();
-                                $scope.mSliders['X'] = scale[0];
-                                $scope.mSliders['Y'] = scale[1];
+                                $scope.mSliders['X'] = parseFloat(scale[0]).toFixed(1);
+                                $scope.mSliders['Y'] = parseFloat(scale[1]).toFixed(1);
                                 break;
                             case 'Pivot':
                                 var pivot = $scope.mXform.getPivot();
-                                $scope.mSliders['X'] = pivot[0];
-                                $scope.mSliders['Y'] = pivot[1];
+                                $scope.mSliders['X'] = parseFloat(pivot[0]).toFixed(1);
+                                $scope.mSliders['Y'] = parseFloat(pivot[1]).toFixed(1);
                                 break;
                         }
                            
