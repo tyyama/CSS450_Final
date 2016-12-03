@@ -90,10 +90,12 @@ header, footer {
         background: #eee;
         box-shadow: -2px 0 4px rgba(black, .2);
         background: transparent;
+        pointer-events: none; // make clicks pass through sidebar
         
         .controls {
             flex: 1;
             background: #eee;
+            pointer-events: auto; // make controls clickable again
             /*border-bottom: 4px solid darken(white, 40);*/
         }
         

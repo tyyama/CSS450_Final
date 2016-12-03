@@ -69,10 +69,12 @@ header, footer {
     flex-direction: column;
     background: #eee;
     box-shadow: -2px 0 4px rgba(0, 0, 0, 0.2);
-    background: transparent; }
+    background: transparent;
+    pointer-events: none; }
     .content aside .controls {
       flex: 1;
       background: #eee;
+      pointer-events: auto;
       /*border-bottom: 4px solid darken(white, 40);*/ }
     .content aside .small {
       height: 25rem;

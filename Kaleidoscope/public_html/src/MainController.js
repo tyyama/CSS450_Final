@@ -26,7 +26,7 @@ myModule.controller('MainCtrl', function($scope) {
             "View");
             
     $scope.mSmallView = new Camera(
-            [0, 1.5],
+            [0, 0],
             8,
             [0, 0, 0, 0],
             "Editor");
@@ -36,6 +36,10 @@ myModule.controller('MainCtrl', function($scope) {
         
         $scope.mMyWorld.draw($scope.mLargeView);
         $scope.mMyWorld.draw($scope.mSmallView);
+    };
+    
+    $scope.handleClick = function(event) {
+        console.log("Click at (" + event.clientX + ", " + event.clientY + ")");
     };
     
     window.onload = function() {
@@ -58,7 +62,6 @@ myModule.controller('MainCtrl', function($scope) {
             $scope.mCanvas.width = width;
             $scope.mCanvas.height = height;
             
-            console.log(width, height);
             var largeViewWidth = width - $scope.mSidebar.clientWidth;
             var largeViewHeight = height;
             var largeViewSize = Math.min(largeViewWidth, largeViewHeight);
