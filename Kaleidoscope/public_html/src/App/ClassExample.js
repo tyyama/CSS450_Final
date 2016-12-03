@@ -15,9 +15,19 @@ function ClassExample() {
         
     this.mManipulator = new Manipulator(this.mConstColorShader);
     this.mBody = new BodyWithArms(this.mConstColorShader);
-    this.mTest = new SquareRenderable(this.mConstColorShader);
-    this.mTest.setColor([0, 1, 1, 1]);
-    this.mTest.getXform().setPosition(2, 3);
+    this.mTest = null;
+    
+    var maskFile = new XMLHttpRequest();
+    maskFile.open('GET', '/Kaleidoscope/assets/CircularMask.obj');
+    maskFile.onreadystatechange = function() {
+        if (maskFile.readyState === 4 && (maskFile.status === 200 || maskFile.status === 0)) {
+            this.mTest = new MeshRenderable(this.mConstColorShader, maskFile.responseText);
+            this.mTest.setColor([.05, .05, .05, 1]);
+            this.mTest.getXform().setPosition(0, 0);
+            this.mTest.getXform().setSize(10, 10);
+        }
+    }.bind(this);
+    maskFile.send(null);
 }
 
 
@@ -25,10 +35,14 @@ ClassExample.prototype.draw = function (camera) {
     // Step F: Starts the drawing by activating the camera
     camera.setupViewProjection();
     var cameraName = camera.getName();
-    if (cameraName === "Editor") {
+    if (cameraName === "Editor" || true) {
         this.mBody.draw(camera);
-    } else if (cameraName === "View") {
-        this.mTest.draw(camera);
+    }
+    
+    if (cameraName === "View") {
+        if (this.mTest) {
+            this.mTest.draw(camera);
+        }
     }
 };
 

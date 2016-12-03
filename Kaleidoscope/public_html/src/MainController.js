@@ -20,8 +20,8 @@ myModule.controller('MainCtrl', function($scope) {
 //    $scope.mSelectedXform.setSize(4, 2);
     
     $scope.mLargeView = new Camera(
-            [0, 1.5],
-            8,
+            [0, 0],
+            10,
             [0, 0, 0, 0],
             "View");
             
@@ -32,7 +32,7 @@ myModule.controller('MainCtrl', function($scope) {
             "Editor");
     
     $scope.mainTimerHandler = function() {
-        gEngine.Core.clearCanvas([.9, .9, .9, 1]);
+        gEngine.Core.clearCanvas([.05, .05, .05, 1]);
         
         $scope.mMyWorld.draw($scope.mLargeView);
         $scope.mMyWorld.draw($scope.mSmallView);
@@ -61,7 +61,10 @@ myModule.controller('MainCtrl', function($scope) {
             console.log(width, height);
             var largeViewWidth = width - $scope.mSidebar.clientWidth;
             var largeViewHeight = height;
-            $scope.mLargeView.setViewport([0, 0, largeViewWidth, largeViewHeight]);
+            var largeViewSize = Math.min(largeViewWidth, largeViewHeight);
+            var largeViewX = largeViewWidth / 2 - largeViewSize / 2;
+            var largeViewY = largeViewHeight / 2 - largeViewSize / 2;
+            $scope.mLargeView.setViewport([largeViewX, largeViewY, largeViewSize, largeViewSize]);
             
             var smallViewWidth = $scope.mSidebar.clientWidth;
             var smallViewHeight = $scope.mSidebar.clientWidth;
