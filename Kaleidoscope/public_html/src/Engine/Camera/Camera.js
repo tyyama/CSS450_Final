@@ -9,11 +9,13 @@
 
 "use strict";
 
-function Camera(wcCenter, wcWidth, viewportArray) {
+function Camera(wcCenter, wcWidth, viewportArray, name) {
     this.mWCCenter = wcCenter;
     this.mWCWidth = wcWidth;
     this.mNearPlane = 0;
     this.mFarPlane = 1000;
+    this.mName = name;
+    
     this.setViewport(viewportArray);
 
     // transformation matrices
@@ -37,6 +39,7 @@ Camera.prototype.setWCWidth = function (width) { this.mWCWidth = width; };
 Camera.prototype.getWCWidth = function () { return this.mWCWidth; };
 Camera.prototype.getWCHeight = function () { return this.getWCWidth() * this.mViewport[3] / this.mViewport[2]; };
                                 // viewport.Height / viewport.Width
+Camera.prototype.getName = function () { return this.mName; };
  
 
 Camera.prototype.setViewport = function (viewportArray) { this.mViewport = viewportArray; };

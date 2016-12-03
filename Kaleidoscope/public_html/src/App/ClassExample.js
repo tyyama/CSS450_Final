@@ -15,13 +15,21 @@ function ClassExample() {
         
     this.mManipulator = new Manipulator(this.mConstColorShader);
     this.mBody = new BodyWithArms(this.mConstColorShader);
+    this.mTest = new SquareRenderable(this.mConstColorShader);
+    this.mTest.setColor([0, 1, 1, 1]);
+    this.mTest.getXform().setPosition(2, 3);
 }
 
 
 ClassExample.prototype.draw = function (camera) {
     // Step F: Starts the drawing by activating the camera
     camera.setupViewProjection();
-    this.mBody.draw(camera);
+    var cameraName = camera.getName();
+    if (cameraName === "Editor") {
+        this.mBody.draw(camera);
+    } else if (cameraName === "View") {
+        this.mTest.draw(camera);
+    }
 };
 
 ClassExample.prototype.leftChildXform = function () {

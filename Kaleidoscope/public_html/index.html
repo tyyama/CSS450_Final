@@ -60,31 +60,31 @@ and open the template in the editor.
                timeron="true"
                callback="mainTimerHandler"></css-timer>
     
-        <header>
+        <header id="header">
             <h1>Kaleidoscope Editor</h1>
             <!--<div class="icon share"></div>-->
         </header>
         
-        <div class="content">
+        <div class="content" id="GLCanvas_Container">
             
-            <div id="GLCanvas_Large_Container" class="large">
-                <canvas id="GLCanvas_Large"
+            <!--<div id="GLCanvas_Large_Container" class="large">-->
+                <canvas id="GLCanvas"
                         width="600"
                         height="600">
                     Your browser does not support the HTML5 canvas.
                 </canvas>           
-            </div>
+            <!--</div>-->
             
             <aside id="sidebar">
                 <div class="controls">
                     <xform model="mSelectedXform"></xform>
                 </div>
                 <div class="small">
-                    <canvas id="GLCanvas_Small"
+<!--                    <canvas id="GLCanvas_Small"
                             width="200"
                             height="200">
                         Your browser does not support the HTML5 canvas.
-                    </canvas>
+                    </canvas>-->
                 </div>
             </aside>
         </div>
