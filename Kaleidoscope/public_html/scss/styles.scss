@@ -88,9 +88,10 @@ header, footer {
         display: flex;
         flex-direction: column;
         background: #eee;
-        box-shadow: -2px 0 4px rgba(black, .2);
+        box-shadow: -6px 0 4px rgba(black, .2);
         background: transparent;
         pointer-events: none; // make clicks pass through sidebar
+        border-left: 4px solid #aaa;
         
         .controls {
             flex: 1;
