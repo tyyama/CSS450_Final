@@ -19,6 +19,7 @@ var gEngine = gEngine || { };
 gEngine.VertexBuffer = (function () {
     // reference to the vertex positions for the square in the gl context
     var mSquareVertexBuffer = null;
+    var mTriangleVertexBuffer = null;
 
     // First: define the vertices for a square
     var verticesOfSquare = [
@@ -26,6 +27,12 @@ gEngine.VertexBuffer = (function () {
         -0.5, 0.5, 0.0,
         0.5, -0.5, 0.0,
         -0.5, -0.5, 0.0
+    ];
+    
+    var verticesOfTriangle = [
+        0.5, 0.5, 0.0,
+        -0.5, 0.5, 0.0,
+        0.0, -0.5, 0.0
     ];
 
     var initialize = function () {
@@ -39,13 +46,19 @@ gEngine.VertexBuffer = (function () {
 
         // Step C: Loads verticesOfSquare into the vertexBuffer
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfSquare), gl.STATIC_DRAW);
+        
+        mTriangleVertexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, mTriangleVertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfTriangle), gl.STATIC_DRAW);
     };
 
-    var getGLVertexRef = function () { return mSquareVertexBuffer; };
+    var getSquareVertexRef = function () { return mSquareVertexBuffer; };
+    var getTriangleVertexRef = function () { return mTriangleVertexBuffer; };
 
     var mPublic = {
         initialize: initialize,
-        getGLVertexRef: getGLVertexRef
+        getSquareVertexRef: getSquareVertexRef,
+        getTriangleVertexRef: getTriangleVertexRef
     };
 
     return mPublic;

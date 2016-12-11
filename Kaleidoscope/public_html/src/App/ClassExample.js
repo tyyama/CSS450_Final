@@ -15,16 +15,20 @@ function ClassExample() {
         
     this.mManipulator = new Manipulator(this.mConstColorShader);
     this.mBody = new BodyWithArms(this.mConstColorShader);
-    this.mTest = null;
+    this.mMask = null;
     
+    this.mTriangle = new TriangleRenderable(this.mConstColorShader);
+    this.mTriangle.setColor([0, 1, 0, 1]);
+    
+    // load circular mask mesh
     var maskFile = new XMLHttpRequest();
     maskFile.open('GET', '/Kaleidoscope/assets/CircularMask.obj');
     maskFile.onreadystatechange = function() {
         if (maskFile.readyState === 4 && (maskFile.status === 200 || maskFile.status === 0)) {
-            this.mTest = new MeshRenderable(this.mConstColorShader, maskFile.responseText);
-            this.mTest.setColor([.05, .05, .05, 1]);
-            this.mTest.getXform().setPosition(0, 0);
-            this.mTest.getXform().setSize(10, 10);
+            this.mMask = new MeshRenderable(this.mConstColorShader, maskFile.responseText);
+            this.mMask.setColor([.05, .05, .05, 1]);
+            this.mMask.getXform().setPosition(0, 0);
+            this.mMask.getXform().setSize(10, 10);
         }
     }.bind(this);
     maskFile.send(null);
@@ -40,10 +44,12 @@ ClassExample.prototype.draw = function (camera) {
     }
     
     if (cameraName === "View") {
-        if (this.mTest) {
-            this.mTest.draw(camera);
+        if (this.mMask) {
+            this.mMask.draw(camera);
         }
     }
+    
+    this.mTriangle.draw(camera);
 };
 
 ClassExample.prototype.leftChildXform = function () {
