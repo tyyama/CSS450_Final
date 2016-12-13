@@ -12,6 +12,14 @@ function ClassExample() {
     this.mConstColorShader = new SimpleShader(
         "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/SimpleFS.glsl");    // Path to the simple FragmentShader
+    
+    this.mVertexColorShader = new ColorVertexShader(
+        "src/GLSLShaders/ColorVertexVS.glsl",      // Path to the VertexShader 
+        "src/GLSLShaders/ColorVertexFS.glsl");    // Path to the simple FragmentShader
+    
+    this.mFileTextureShader = new FileTextureShader(
+        "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
+        "src/GLSLShaders/TextureFS.glsl");    // Path to the simple FragmentShader
         
     this.mManipulator = new Manipulator(this.mConstColorShader);
     this.mBody = new BodyWithArms(this.mConstColorShader);
@@ -39,17 +47,17 @@ ClassExample.prototype.draw = function (camera) {
     // Step F: Starts the drawing by activating the camera
     camera.setupViewProjection();
     var cameraName = camera.getName();
-    if (cameraName === "Editor" || true) {
-        this.mBody.draw(camera);
+    if (cameraName === "Editor" ) {
+        this.mBody.draw(camera);   //Draw body in editor only
     }
     
     if (cameraName === "View") {
         if (this.mMask) {
             this.mMask.draw(camera);
         }
+         this.mTriangle.draw(camera);
     }
-    
-    this.mTriangle.draw(camera);
+
 };
 
 ClassExample.prototype.leftChildXform = function () {
