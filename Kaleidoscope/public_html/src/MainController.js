@@ -34,8 +34,18 @@ myModule.controller('MainCtrl', function($scope) {
     $scope.mainTimerHandler = function() {
         gEngine.Core.clearCanvas([.05, .05, .05, 1]);
         
-        $scope.mMyWorld.draw($scope.mLargeView);
         $scope.mMyWorld.draw($scope.mSmallView);
+        var canvas  = document.getElementById("GLCanvas");
+        
+        var img = new Image();
+        img.src = cropDataURL(canvas.toDataURL(),window.innerWidth - $scope.mSidebar.clientWidth,$scope.mSidebar.clientWidth,$scope.mSidebar.clientWidth,$scope.mSidebar.clientWidth);
+        
+        $scope.mMyWorld.newFileTexture(img.src,true);
+        
+        //console.log(img.src);
+        
+        $scope.mMyWorld.draw($scope.mLargeView);
+        
     };
     
     $scope.handleClick = function(event) {

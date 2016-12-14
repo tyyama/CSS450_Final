@@ -20,13 +20,18 @@ function ClassExample() {
     this.mFileTextureShader = new FileTextureShader(
         "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/TextureFS.glsl");    // Path to the simple FragmentShader
-        
+    
+    this.mFileTexture = null;
+    
     this.mManipulator = new Manipulator(this.mConstColorShader);
     this.mBody = new BodyWithArms(this.mConstColorShader);
     this.mMask = null;
     
-    this.mTriangle = new TriangleRenderable(this.mConstColorShader);
-    this.mTriangle.setColor([0, 1, 0, 1]);
+    this.mTriangleArray = [];
+    
+    this.mTriangle = new TriangleRenderable(this.mFileTextureShader);
+    this.mSquare = new SquareRenderable(this.mFileTextureShader);
+    //this.mTriangle.setColor([0, 1, 0, 1]);
     
     // load circular mask mesh
     var maskFile = new XMLHttpRequest();
@@ -56,6 +61,7 @@ ClassExample.prototype.draw = function (camera) {
             this.mMask.draw(camera);
         }
          this.mTriangle.draw(camera);
+         this.mSquare.draw(camera);
     }
 
 };
