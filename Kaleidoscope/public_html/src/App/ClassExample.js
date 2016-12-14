@@ -21,17 +21,25 @@ function ClassExample() {
         "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/TextureFS.glsl");    // Path to the simple FragmentShader
     
-    this.mFileTexture = null;
+    //this.mFileTexture = null;
     
     this.mManipulator = new Manipulator(this.mConstColorShader);
     this.mBody = new BodyWithArms(this.mConstColorShader);
     this.mMask = null;
     
-    this.mTriangleArray = [];
+    this.mAllObjects = [];
     
-    this.mTriangle = new TriangleRenderable(this.mFileTextureShader);
-    this.mSquare = new SquareRenderable(this.mFileTextureShader);
+    //this.mTriangle = new TriangleRenderable(this.mFileTextureShader);
+    
+    //this.mSquare = new SquareRenderable(this.mFileTextureShader);
+    //this.mCurrentObject = this.mSquare;
+    this.mFileTexture = new FileTextureSupport("assets/tomodachi.png", true);
+    this.vmUseRandomColor = true;
+    this.defineCenter(40, 30);
+    this.mCurrentObject.getXform().setSize(25, 25);
     //this.mTriangle.setColor([0, 1, 0, 1]);
+    
+    
     
     // load circular mask mesh
     var maskFile = new XMLHttpRequest();
@@ -45,7 +53,7 @@ function ClassExample() {
         }
     }.bind(this);
     maskFile.send(null);
-}
+};
 
 
 ClassExample.prototype.draw = function (camera) {
@@ -60,8 +68,14 @@ ClassExample.prototype.draw = function (camera) {
         if (this.mMask) {
             this.mMask.draw(camera);
         }
-         this.mTriangle.draw(camera);
-         this.mSquare.draw(camera);
+         //this.mTriangle.draw(camera);
+         //this.mSquare.draw(camera);
+         
+        
+        for (var i=0; i<this.mAllObjects.length; i++){
+            this.mAllObjects[i].draw(camera);
+            console.log(this.mAllObjects[i]);
+        }
     }
 
 };

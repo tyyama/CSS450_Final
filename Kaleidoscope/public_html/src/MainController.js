@@ -37,10 +37,10 @@ myModule.controller('MainCtrl', function($scope) {
         $scope.mMyWorld.draw($scope.mSmallView);
         var canvas  = document.getElementById("GLCanvas");
         
-        var img = new Image();
-        img.src = cropDataURL(canvas.toDataURL(),window.innerWidth - $scope.mSidebar.clientWidth,$scope.mSidebar.clientWidth,$scope.mSidebar.clientWidth,$scope.mSidebar.clientWidth);
+        //var img = new Image();
+        //img.src = cropDataURL(canvas.toDataURL(),window.innerWidth - $scope.mSidebar.clientWidth,$scope.mSidebar.clientWidth,$scope.mSidebar.clientWidth,$scope.mSidebar.clientWidth);
         
-        $scope.mMyWorld.newFileTexture(img.src,true);
+        //$scope.mMyWorld.newFileTexture(img.src,true);
         
         //console.log(img.src);
         

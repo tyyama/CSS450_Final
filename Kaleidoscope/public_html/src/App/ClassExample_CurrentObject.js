@@ -46,11 +46,11 @@ ClassExample.prototype.defineWidth = function (x, y) {
 
 ClassExample.prototype.newFileTexture = function(file, isURL) {
     this.mFileTexture = new FileTextureSupport(file, isURL);
-    //if (this.mCurrentObject.setFileTexture !== undefined)
-        //this.mCurrentObject.setFileTexture(this.mFileTexture);
+    if (this.mCurrentObject.setFileTexture !== undefined)
+        this.mCurrentObject.setFileTexture(this.mFileTexture);
         
-    if (this.mTriangle.setFileTexture !== undefined) this.mTriangle.setFileTexture(this.mFileTexture);
-    if (this.mSquare.setFileTexture !== undefined) this.mSquare.setFileTexture(this.mFileTexture);
+    //if (this.mTriangle.setFileTexture !== undefined) this.mTriangle.setFileTexture(this.mFileTexture);
+    // if (this.mSquare.setFileTexture !== undefined) this.mSquare.setFileTexture(this.mFileTexture);
 };
 
 ClassExample.prototype.getFileTexture = function() {
