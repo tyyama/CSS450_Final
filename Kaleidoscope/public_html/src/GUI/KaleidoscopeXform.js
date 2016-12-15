@@ -40,7 +40,8 @@ angular.module('XformModule', ['SliderModule'])
                 `,
         
                 scope: {
-                    mXform: "=model"
+                    mXform: "=model",
+                    mShouldUpdate: "=update"
                 },
                 
                 controller: function($scope) {
@@ -80,6 +81,13 @@ angular.module('XformModule', ['SliderModule'])
                     
                     $scope.$watch('mXform', function(newValue, oldValue) {
                         $scope.updateValues();
+                    });
+                    
+                    $scope.$watch('mShouldUpdate', function(newValue, oldValue) {
+                        if ($scope.mShouldUpdate) {
+                            $scope.updateValues();
+                            $scope.mShouldUpdate = false;
+                        }
                     });
                     
                     $scope.updateValues = function() {

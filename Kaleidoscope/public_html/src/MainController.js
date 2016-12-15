@@ -29,6 +29,7 @@ myModule.controller('MainCtrl', function($scope) {
     $scope.reflections = $scope.reflect[3];
     
     $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();//new PivotedTransform();
+    $scope.mShouldUpdate = false;
 //    $scope.mSelectedXform.setSize(4, 2);
     
     $scope.mLargeView = new Camera(
@@ -60,7 +61,6 @@ myModule.controller('MainCtrl', function($scope) {
         var y = $scope.mCanvasMouse.getPixelYPos(event);
         
         if ($scope.mSmallView.isMouseInViewport(x, y)) {
-            console.log("In editor!");
             $scope.mLastWCPosX = $scope.mSmallView.mouseWCX(x);
             $scope.mLastWCPosY = $scope.mSmallView.mouseWCY(y);
             
@@ -69,6 +69,7 @@ myModule.controller('MainCtrl', function($scope) {
                                                 $scope.mLastWCPosY);
 //                console.log($scope.mMyWorld.getCurrentXform());
                 $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();
+                $scope.mShouldUpdate = true;
             }
         }
         
