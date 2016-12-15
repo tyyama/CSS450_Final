@@ -27,7 +27,7 @@ function ClassExample() {
     
     // load circular mask mesh
     var maskFile = new XMLHttpRequest();
-    maskFile.open('GET', '/Kaleidoscope/assets/CircularMask.obj');
+    maskFile.open('GET', './assets/CircularMask.obj');
     maskFile.onreadystatechange = function() {
         if (maskFile.readyState === 4 && (maskFile.status === 200 || maskFile.status === 0)) {
             this.mMask = new MeshRenderable(this.mConstColorShader, maskFile.responseText);
