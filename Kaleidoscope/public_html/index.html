@@ -90,12 +90,7 @@ and open the template in the editor.
                     
                     <br>&nbsp;&nbsp;&nbsp;
                     # of reflections
-                    <select ng-init="12" ng-model="reflections">
-                        <option>6</option>
-                        <option>8</option>
-                        <option>12</option>
-                        <option>18</option>
-                    </select>
+                    <select ng-model="reflections" ng-options="reflection.num for reflection in reflect"></select>
                     
                     <br><br>&nbsp;&nbsp;&nbsp;
                     <button ng-click="saveCanvasAsImage()">
