@@ -33,7 +33,7 @@ function ClassExample() {
             this.mMask = new MeshRenderable(this.mConstColorShader, maskFile.responseText);
             this.mMask.setColor([.05, .05, .05, 1]);
             this.mMask.getXform().setSize(10.1, 10.1);
-            this.mMask.getXform().setPosition(-0.02, 0);
+            this.mMask.getXform().setPosition(0, 0);
             
         }
     }.bind(this);
