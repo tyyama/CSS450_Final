@@ -18,7 +18,7 @@ myModule.controller('MainCtrl', function($scope) {
     
     $scope.reflections = 12;
     
-    $scope.mSelectedXform = $scope.mMyWorld.parentXform();//new PivotedTransform();
+    $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();//new PivotedTransform();
 //    $scope.mSelectedXform.setSize(4, 2);
     
     $scope.mLargeView = new Camera(
@@ -54,6 +54,8 @@ myModule.controller('MainCtrl', function($scope) {
             if (event.which === 1) {
                 $scope.mMyWorld.detectMouseOver($scope.mLastWCPosX,
                                                 $scope.mLastWCPosY);
+                console.log($scope.mMyWorld.getCurrentXform());
+                $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();
             }
         }
         
@@ -61,7 +63,7 @@ myModule.controller('MainCtrl', function($scope) {
     
     $scope.handleRelease = function(event) {
         $scope.mMyWorld.resetSelection();
-    }
+    };
     
     window.onload = function() {
         $scope.handleResize();

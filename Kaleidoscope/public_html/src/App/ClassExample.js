@@ -37,6 +37,8 @@ function ClassExample() {
         }
     }.bind(this);
     maskFile.send(null);
+    
+    this.mCurrentXform = this.mBody.parentXform();
 }
 
 
@@ -61,22 +63,8 @@ ClassExample.prototype.draw = function (camera,reflections) {
 
 };
 
-ClassExample.prototype.leftChildXform = function () {
-    return this.mBody.leftChildXform();
-};
-
-ClassExample.prototype.rightChildXform = function () {
-    return this.mBody.rightChildXform();
-};
-
-
-ClassExample.prototype.topChildXform = function () {
-    return this.mBody.topChildXform();
-};
-
-
-ClassExample.prototype.parentXform = function () {
-    return this.mBody.parentXform();
+ClassExample.prototype.getCurrentXform = function () {
+    return this.mCurrentXform;
 };
 
 // *** GLOBAL funciton for bound checking ...
