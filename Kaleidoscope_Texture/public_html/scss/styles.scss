@@ -1,0 +1,169 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 1, 2016, 7:18:20 PM
+    Author     : sawyer
+*/
+
+$primary-color: #212121;
+$page-background-color: #fafafa;
+$page-text-color: #222;
+$border-height: 3rem;
+$sidebar-width: 25rem;
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+}
+
+body {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    
+    display: flex;
+    flex-direction: column;
+    background: $page-background-color;
+    color: $page-text-color;
+}
+
+header {
+    height: $border-height;
+    background: $primary-color;
+    display: flex;
+    color: #fafafa;
+    
+    .icon {
+        height: $border-height;
+        width: $border-height;
+        background: blue;
+    }
+    
+    h1 {
+        flex: 1;
+        line-height: $border-height;
+        margin: 0;
+    }
+}
+
+header, footer {
+    padding-left: $border-height;
+    padding-right: $border-height;
+}
+
+.content {
+    flex: 1;
+    position: relative;
+    /*display: flex;*/
+    
+    canvas {
+        background: darken(white, 20);
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+/*        display: block;
+        width: 100%;
+        height: 100%;*/
+    }
+    
+    aside {
+/*        flex: 0 0 $sidebar-width;
+        max-width: $sidebar-width;*/
+        width: $sidebar-width;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        background: #eee;
+        box-shadow: -6px 0 4px rgba(black, .2);
+        background: transparent;
+        pointer-events: none; // make clicks pass through sidebar
+        border-left: 4px solid #aaa;
+        
+        .controls {
+            flex: 1;
+            background: #eee;
+            pointer-events: auto; // make controls clickable again
+            /*border-bottom: 4px solid darken(white, 40);*/
+        }
+        
+        .small {
+            height: $sidebar-width;
+            background: transparent;
+        }
+    }
+}
+
+footer {
+    height: $border-height;
+    background: $primary-color;
+    
+    p {
+        color: #777;
+        text-align: center;
+        font-size: .8rem;
+        line-height: $border-height;
+        margin: 0;
+    }
+}
+
+// Directive styles
+
+xform {
+    padding: 1rem;
+    
+    .modes {
+        display: flex;
+        
+        label {
+            flex: 1;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            
+            input {
+                margin-left: .5rem;
+            }
+        }
+    }
+    
+    slider {
+        margin-bottom: .5rem;
+    }
+}
+
+slider {
+    display: flex;
+    align-items: center;
+    
+    > * {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
+    p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    input[type="range"] {
+        flex: 1;
+    }
+    
+    input[type="text"] {
+        width: 3.5rem;
+    }
+}
