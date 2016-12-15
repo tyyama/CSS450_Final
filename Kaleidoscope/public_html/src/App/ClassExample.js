@@ -22,7 +22,7 @@ function ClassExample() {
         "src/GLSLShaders/TextureFS.glsl");    // Path to the simple FragmentShader
         
     this.mManipulator = new Manipulator(this.mConstColorShader);
-    this.mBody = new BodyWithArms(this.mConstColorShader);
+    this.mBody = new Spiky(this.mConstColorShader);
     this.mMask = null;
     
     // load circular mask mesh

@@ -1,5 +1,5 @@
 /*
- * File: BodyWithArms.js 
+ * File: Spiky.js 
   */
 /*jslint node: true, vars: true */
 /*global gEngine, SimpleShader, SquareRenderable, SceneNode, ArmSegment, Manipulator */
@@ -7,7 +7,7 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function BodyWithArms(shader) {
+function Spiky(shader) {
     SceneNode.call(this, shader, "Base", false);
     
     this.mArmBase = new ArmSegment(shader, "ArmBase", 0, 1.4);
@@ -53,22 +53,22 @@ function BodyWithArms(shader) {
     xf.setSize(0.25, 0.25);
     xf.setPosition(0, 0);
 }
-gEngine.Core.inheritPrototype(BodyWithArms, SceneNode);
+gEngine.Core.inheritPrototype(Spiky, SceneNode);
 
-BodyWithArms.prototype.mArmBase = function () {
+Spiky.prototype.mArmBase = function () {
     return this.mArmBase.getXform();
 };
 
-BodyWithArms.prototype.mArmTipLeft = function () {
+Spiky.prototype.mArmTipLeft = function () {
     return this.mArmTipLeft.getXform();
 };
 
 
-BodyWithArms.prototype.mArmTipRight = function () {
+Spiky.prototype.mArmTipRight = function () {
     return this.mArmTipRight.getXform();
 };
 
 
-BodyWithArms.prototype.parentXform = function () {
+Spiky.prototype.parentXform = function () {
     return this.getXform();
 };
