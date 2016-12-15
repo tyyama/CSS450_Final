@@ -32,7 +32,7 @@ myModule.controller('MainCtrl', function($scope) {
     console.log($scope.mSelectedObject);
     $scope.mSelectedXform = $scope.mSelectedObject.getXform();
     $scope.mSelectedRotSpeed = $scope.mSelectedObject.getRotSpeed();
-    $scope.mShouldUpdate = true;
+    $scope.mShouldUpdate = false;
 //    $scope.mSelectedXform.setSize(4, 2);
     
     $scope.mLargeView = new Camera(
@@ -58,7 +58,7 @@ myModule.controller('MainCtrl', function($scope) {
         $scope.mMyWorld.draw($scope.mLargeView,parseInt($scope.reflections.num));
         $scope.mMyWorld.draw($scope.mSmallView);
         
-        $scope.mShouldUpdate = true;
+        //$scope.mShouldUpdate = true;
     };
     
     $scope.handleMove = function(event) {
@@ -152,16 +152,19 @@ myModule.controller('MainCtrl', function($scope) {
     
     $scope.pauseRotation = function() {
         $scope.mSelectedObject.shouldRotate(false);
+        $scope.mShouldUpdate = true;
     };
     
     $scope.playRotation = function() {
         $scope.mSelectedObject.shouldRotate(true);
+        $scope.mShouldUpdate = true;
     };
     
     $scope.clearRotation = function() {
         console.log("RAN");
         $scope.mSelectedObject.clearRotSpeed();
         $scope.mSelectedRotSpeed = $scope.mSelectedObject.getRotSpeed();
+        $scope.mShouldUpdate = true;
     };
     
     $scope.handleResize($scope.mLargeView, $scope.mSmallView);

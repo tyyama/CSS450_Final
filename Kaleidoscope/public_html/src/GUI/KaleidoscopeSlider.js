@@ -31,7 +31,7 @@ angular.module('SliderModule', [])
                     $scope.$watch("mTmp", function(newValue, oldValue) {
                         var f = parseFloat($scope.mTmp);
                         
-                        if (f)
+                        if (f !== "NaN")
                             $scope.mValue = f;
                     });
                 },

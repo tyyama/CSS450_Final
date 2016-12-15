@@ -98,8 +98,11 @@ SceneNode.prototype.draw = function (aCamera, parentMat, deg, flip) {
     if (this.mShouldRotate) {
         var rot = this.mXform.getRotationInDegree();
         rot += this.mRotSpeed * 0.05;
+        
         rot %= 360;
         if (rot < -180) rot += 360;
+        if (rot > 180) rot -= 360;
+        
         this.mXform.setRotationInDegree(rot);   
     }
     
