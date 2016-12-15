@@ -32,7 +32,7 @@ angular.module('SliderModule', [])
                         var f = parseFloat($scope.mTmp);
                         
                         if (f)
-                            $scope.mValue = $scope.mTmp;
+                            $scope.mValue = f;
                     });
                 },
                 compile: function(element, attrs) {
