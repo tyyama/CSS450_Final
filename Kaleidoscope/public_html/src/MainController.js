@@ -37,9 +37,11 @@ myModule.controller('MainCtrl', function($scope) {
             
     $scope.mSmallView = new Camera(
             [0, 0],
-            8,
+            15,
             [0, 0, 0, 0],
             "Editor");
+            
+    $scope.mViewsSwapped = false;
     
     $scope.mLastWCPosX = 0;
     $scope.mLastWCPosY = 0;
@@ -56,13 +58,14 @@ myModule.controller('MainCtrl', function($scope) {
         var y = $scope.mCanvasMouse.getPixelYPos(event);
         
         if ($scope.mSmallView.isMouseInViewport(x, y)) {
+            console.log("In editor!");
             $scope.mLastWCPosX = $scope.mSmallView.mouseWCX(x);
             $scope.mLastWCPosY = $scope.mSmallView.mouseWCY(y);
             
             if (event.which === 1) {
                 $scope.mMyWorld.detectMouseOver($scope.mLastWCPosX,
                                                 $scope.mLastWCPosY);
-                console.log($scope.mMyWorld.getCurrentXform());
+//                console.log($scope.mMyWorld.getCurrentXform());
                 $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();
             }
         }
@@ -78,34 +81,48 @@ myModule.controller('MainCtrl', function($scope) {
     };
     
     window.onresize = function() {
-        $scope.handleResize();
+        if ($scope.mViewsSwapped) {
+            $scope.handleResize($scope.mSmallView, $scope.mLargeView);
+        } else {
+            $scope.handleResize($scope.mLargeView, $scope.mSmallView);
+        }
     };
     
     $scope.mLargeCanvasContainer = document.getElementById('GLCanvas_Container');
     $scope.mHeader = document.getElementById('header');
     $scope.mSidebar = document.getElementById('sidebar');
     
-    $scope.handleResize = function() {
+    $scope.handleResize = function(largeView, smallView) {
+        if (!largeView || !smallView) return;
+        
         var width = window.innerWidth;
         var height = window.innerHeight -  2 * $scope.mHeader.clientHeight;
 
-        if ($scope.mCanvas.width !== width || $scope.mCanvas.height !== height) {
-            $scope.mCanvas.width = width;
-            $scope.mCanvas.height = height;
-            
-            var largeViewWidth = width - $scope.mSidebar.clientWidth;
-            var largeViewHeight = height;
-            var largeViewSize = Math.min(largeViewWidth, largeViewHeight);
-            var largeViewX = largeViewWidth / 2 - largeViewSize / 2;
-            var largeViewY = largeViewHeight / 2 - largeViewSize / 2;
-            $scope.mLargeView.setViewport([largeViewX, largeViewY, largeViewSize, largeViewSize]);
-            
-            var smallViewWidth = $scope.mSidebar.clientWidth;
-            var smallViewHeight = $scope.mSidebar.clientWidth;
-            var smallViewX = width - $scope.mSidebar.clientWidth;
-            $scope.mSmallView.setViewport([smallViewX, 0, smallViewWidth, smallViewHeight]);
-            
-            $scope.mCanvasMouse = new CanvasMouseSupport("GLCanvas");
+        $scope.mCanvas.width = width;
+        $scope.mCanvas.height = height;
+
+        var largeViewWidth = width - $scope.mSidebar.clientWidth;
+        var largeViewHeight = height;
+        var largeViewSize = Math.min(largeViewWidth, largeViewHeight);
+        var largeViewX = largeViewWidth / 2 - largeViewSize / 2;
+        var largeViewY = largeViewHeight / 2 - largeViewSize / 2;
+        largeView.setViewport([largeViewX, largeViewY, largeViewSize, largeViewSize]);
+
+        var smallViewWidth = $scope.mSidebar.clientWidth;
+        var smallViewHeight = $scope.mSidebar.clientWidth;
+        var smallViewX = width - $scope.mSidebar.clientWidth;
+        smallView.setViewport([smallViewX, 0, smallViewWidth, smallViewHeight]);
+
+        $scope.mCanvasMouse = new CanvasMouseSupport("GLCanvas");
+    };
+    
+    $scope.swapViews = function() {
+        $scope.mViewsSwapped = !$scope.mViewsSwapped;
+        
+        if ($scope.mViewsSwapped) {
+            $scope.handleResize($scope.mSmallView, $scope.mLargeView);
+        } else {
+            $scope.handleResize($scope.mLargeView, $scope.mSmallView);
         }
     };
     
@@ -117,4 +134,6 @@ myModule.controller('MainCtrl', function($scope) {
         document.getElementById('hiddenDiv').innerHTML = '<a id="canvasDownload" href="' + img.src + '" download = "Kaleidoscope">Save</a>';
         document.getElementById("canvasDownload").click();
     };
+    
+    $scope.handleResize($scope.mLargeView, $scope.mSmallView);
 });

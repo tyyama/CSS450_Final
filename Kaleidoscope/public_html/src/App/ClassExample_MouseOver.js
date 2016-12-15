@@ -34,12 +34,10 @@ ClassExample.prototype.detectMouseOver = function (wcX, wcY) {
             this.mBody.selectRightArm(wcPos, this.mManipulator) );
             
         if (!once) {
-            console.log("RAN2");
             this.mManipulator.setXformMatrix(null, null);
         } else {
-            console.log("RAN");
             this.mCurrentXform = this.mManipulator.mSceneNode.getXform();
-            console.log(this.mCurrentXform);
+//            console.log(this.mCurrentXform);
         }
      }
     
