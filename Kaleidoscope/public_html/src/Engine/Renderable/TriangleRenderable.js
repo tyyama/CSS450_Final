@@ -20,13 +20,12 @@ gEngine.Core.inheritPrototype(TriangleRenderable, Renderable);
 // This line MUST be defined right after the constructor
 // To get all the methods defined in the super-class.prototype
 
-// Ovreride the super-class "draw()" method!
-TriangleRenderable.prototype.draw = function (camera, parentMat) {
+TriangleRenderable.prototype.draw = function (camera, parentMat, deg, flip) {
     var gl = gEngine.Core.getGL();
     this.mShader.activateShader(
         gEngine.VertexBuffer.getTriangleVertexRef(),
         this.mColor,        // this is defined in the super class!
-        camera.getVPMatrix());  // always activate the shader first!
+        camera.getVPMatrix(deg,flip));  // always activate the shader first!
     this.computeAndLoadModelXform(parentMat);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 3);
 };

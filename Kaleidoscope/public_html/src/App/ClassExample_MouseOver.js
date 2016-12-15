@@ -29,9 +29,9 @@ ClassExample.prototype.detectMouseOver = function (wcX, wcY) {
         var wcPos = [wcX, wcY];
         var once = (
             this.mBody.selectBase(wcPos, this.mManipulator) ||
-            this.mBody.selectLeftArm(wcPos, this.mManipulator) ||
-            this.mBody.selectTopArm(wcPos, this.mManipulator) ||
-            this.mBody.selectRightArm(wcPos, this.mManipulator) );
+            this.mBody.selectArmBase(wcPos, this.mManipulator) ||
+            this.mBody.selectArmTipLeft(wcPos, this.mManipulator) ||
+            this.mBody.selectArmTipRight(wcPos, this.mManipulator) );
             
         if (!once) {
             this.mManipulator.setXformMatrix(null, null);

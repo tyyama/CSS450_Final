@@ -20,6 +20,9 @@ gEngine.VertexBuffer = (function () {
     // reference to the vertex positions for the square in the gl context
     var mSquareVertexBuffer = null;
     var mTriangleVertexBuffer = null;
+    var mCircleVertexBuffer = null;
+    
+    var mCircleVertexCount = 30;
 
     // First: define the vertices for a square
     var verticesOfSquare = [
@@ -34,6 +37,22 @@ gEngine.VertexBuffer = (function () {
         -0.5, 0.5, 0.0,
         0.0, -0.5, 0.0
     ];
+    
+    var verticesOfCircle = function() {
+        var verticesOfCircle = [0.0, 0.0, 0.0];
+        
+        var radiansPerSlice = 360 / mCircleVertexCount * Math.PI / 180;
+        var currentAngle = 0;
+        for (var i = 0; i <= mCircleVertexCount; i++) {
+            verticesOfCircle.push(Math.cos(currentAngle) / 2);
+            verticesOfCircle.push(Math.sin(currentAngle) / 2);
+            verticesOfCircle.push(0.0);
+            
+           currentAngle += radiansPerSlice;
+        }
+        
+        return verticesOfCircle;
+    };
 
     var initialize = function () {
         var gl = gEngine.Core.getGL();
@@ -50,15 +69,23 @@ gEngine.VertexBuffer = (function () {
         mTriangleVertexBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, mTriangleVertexBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfTriangle), gl.STATIC_DRAW);
+        
+        mCircleVertexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, mCircleVertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfCircle()), gl.STATIC_DRAW);
     };
 
     var getSquareVertexRef = function () { return mSquareVertexBuffer; };
     var getTriangleVertexRef = function () { return mTriangleVertexBuffer; };
+    var getCircleVertexRef = function () { return mCircleVertexBuffer; };
+    var getCircleVertexCount = function () { return mCircleVertexCount; };
 
     var mPublic = {
         initialize: initialize,
         getSquareVertexRef: getSquareVertexRef,
-        getTriangleVertexRef: getTriangleVertexRef
+        getTriangleVertexRef: getTriangleVertexRef,
+        getCircleVertexRef: getCircleVertexRef,
+        getCircleVertexCount: getCircleVertexCount
     };
 
     return mPublic;
