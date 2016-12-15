@@ -25,9 +25,6 @@ function ClassExample() {
     this.mBody = new BodyWithArms(this.mConstColorShader);
     this.mMask = null;
     
-    //this.mTriangle = new TriangleRenderable(this.mConstColorShader);
-    //this.mTriangle.setColor([0, 1, 0, 1]);
-    
     // load circular mask mesh
     var maskFile = new XMLHttpRequest();
     maskFile.open('GET', '/Kaleidoscope/assets/CircularMask.obj');
@@ -40,6 +37,8 @@ function ClassExample() {
         }
     }.bind(this);
     maskFile.send(null);
+    
+    this.mCurrentXform = this.mBody.parentXform();
 }
 
 
@@ -52,35 +51,20 @@ ClassExample.prototype.draw = function (camera,reflections) {
     }
     
     if (cameraName === "View") {
-        if (this.mMask) {
-            this.mMask.draw(camera);
-        }
-        // this.mTriangle.draw(camera);
-         
         var angle = 360/reflections; 
         for(var d=0;d<360;d+=angle){
             this.mBody.draw(camera,undefined,d-angle,(d/angle)%2 === 0);
+        }
+        
+        if (this.mMask) {
+            this.mMask.draw(camera);
         }
     }
 
 };
 
-ClassExample.prototype.leftChildXform = function () {
-    return this.mBody.leftChildXform();
-};
-
-ClassExample.prototype.rightChildXform = function () {
-    return this.mBody.rightChildXform();
-};
-
-
-ClassExample.prototype.topChildXform = function () {
-    return this.mBody.topChildXform();
-};
-
-
-ClassExample.prototype.parentXform = function () {
-    return this.mBody.parentXform();
+ClassExample.prototype.getCurrentXform = function () {
+    return this.mCurrentXform;
 };
 
 // *** GLOBAL funciton for bound checking ...

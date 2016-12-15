@@ -103,6 +103,6 @@ Manipulator.prototype.setXformMatrix = function (m, sn) {
 };
 
 Manipulator.prototype.draw = function (camera, parentMat) {
-    if (this.isActivated())
+    if (this.isActivated() && camera.getName() === "Editor")
         SceneNode.prototype.draw.call(this, camera, parentMat);
 };

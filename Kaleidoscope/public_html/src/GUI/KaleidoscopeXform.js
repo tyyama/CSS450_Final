@@ -75,6 +75,14 @@ angular.module('XformModule', ['SliderModule'])
                     $scope.mValue = 10;
                     
                     $scope.$watch('mSelectedMode', function(newValue, oldValue) {
+                        $scope.updateValues();
+                    });
+                    
+                    $scope.$watch('mXform', function(newValue, oldValue) {
+                        $scope.updateValues();
+                    });
+                    
+                    $scope.updateValues = function() {
                         if (!angular.isDefined($scope.mXform)) return;
                         
                         var mode = $scope.mModes[$scope.mSelectedMode];
@@ -102,7 +110,7 @@ angular.module('XformModule', ['SliderModule'])
                            
                         $scope.mSliderMin = $scope.mSliderLimits[mode][0];
                         $scope.mSliderMax = $scope.mSliderLimits[mode][1];
-                    });
+                    };
                     
                     $scope.$watch('mSliders["X"]', function(newValue, oldValue) {
                         $scope.handleUpdate();

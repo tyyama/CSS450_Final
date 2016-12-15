@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/C:/Users/Vocaloid/Documents/GitHub/CSS450_Final/Kaleidoscope/public_html/src/Engine/Renderable/SquareRenderable.js</file>
             <file>file:/C:/Users/Vocaloid/Documents/GitHub/CSS450_Final/Kaleidoscope/public_html/src/App/ClassExample_CurrentObject.js</file>
@@ -20,5 +21,8 @@
             <file>file:/C:/Users/Vocaloid/Documents/GitHub/CSS450_Final/Kaleidoscope/public_html/index.html</file>
             <file>file:/C:/Users/Vocaloid/Documents/GitHub/CSS450_Final/Kaleidoscope/public_html/src/App/ClassExample.js</file>
         </group>
+=======
+        <group/>
+>>>>>>> origin/Final
     </open-files>
 </project-private>

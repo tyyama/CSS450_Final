@@ -82,11 +82,11 @@ Manipulator.prototype.manipulate = function(wcX, wcY) {
             xf.setPosition(obj[0], obj[1]);
             break;
         case this.kTriggerMode.eTriggerModeScale:
-            xf.incWidthBy(0.1*dx);
-            xf.incHeightBy(0.1*dy);
+            xf.incWidthBy(0.5*dx);
+            xf.incHeightBy(0.5*dy);
             break;
         case this.kTriggerMode.eTriggerModeRotate:
-            var d = 5* Math.sqrt(dx*dx + dy*dy);
+            var d = 30 * Math.sqrt(dx*dx + dy*dy);
             if (dx > 0)
                 d = -d;
             xf.incRotationByDegree(d);

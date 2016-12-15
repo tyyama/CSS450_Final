@@ -26,7 +26,7 @@ myModule.controller('MainCtrl', function($scope) {
     
     $scope.reflections = $scope.reflect[0];
     
-    $scope.mSelectedXform = $scope.mMyWorld.parentXform();//new PivotedTransform();
+    $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();//new PivotedTransform();
 //    $scope.mSelectedXform.setSize(4, 2);
     
     $scope.mLargeView = new Camera(
@@ -41,6 +41,9 @@ myModule.controller('MainCtrl', function($scope) {
             [0, 0, 0, 0],
             "Editor");
     
+    $scope.mLastWCPosX = 0;
+    $scope.mLastWCPosY = 0;
+    
     $scope.mainTimerHandler = function() {
         gEngine.Core.clearCanvas([.05, .05, .05, 1]);
         
@@ -48,8 +51,26 @@ myModule.controller('MainCtrl', function($scope) {
         $scope.mMyWorld.draw($scope.mSmallView);
     };
     
-    $scope.handleClick = function(event) {
-        console.log("Click at (" + event.clientX + ", " + event.clientY + ")");
+    $scope.handleMove = function(event) {
+        var x = $scope.mCanvasMouse.getPixelXPos(event);
+        var y = $scope.mCanvasMouse.getPixelYPos(event);
+        
+        if ($scope.mSmallView.isMouseInViewport(x, y)) {
+            $scope.mLastWCPosX = $scope.mSmallView.mouseWCX(x);
+            $scope.mLastWCPosY = $scope.mSmallView.mouseWCY(y);
+            
+            if (event.which === 1) {
+                $scope.mMyWorld.detectMouseOver($scope.mLastWCPosX,
+                                                $scope.mLastWCPosY);
+                console.log($scope.mMyWorld.getCurrentXform());
+                $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();
+            }
+        }
+        
+    };
+    
+    $scope.handleRelease = function(event) {
+        $scope.mMyWorld.resetSelection();
     };
     
     window.onload = function() {
@@ -83,6 +104,8 @@ myModule.controller('MainCtrl', function($scope) {
             var smallViewHeight = $scope.mSidebar.clientWidth;
             var smallViewX = width - $scope.mSidebar.clientWidth;
             $scope.mSmallView.setViewport([smallViewX, 0, smallViewWidth, smallViewHeight]);
+            
+            $scope.mCanvasMouse = new CanvasMouseSupport("GLCanvas");
         }
     };
     
