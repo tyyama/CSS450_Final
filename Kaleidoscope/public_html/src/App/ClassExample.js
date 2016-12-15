@@ -25,8 +25,8 @@ function ClassExample() {
     this.mBody = new BodyWithArms(this.mConstColorShader);
     this.mMask = null;
     
-    this.mTriangle = new TriangleRenderable(this.mConstColorShader);
-    this.mTriangle.setColor([0, 1, 0, 1]);
+    //this.mTriangle = new TriangleRenderable(this.mConstColorShader);
+    //this.mTriangle.setColor([0, 1, 0, 1]);
     
     // load circular mask mesh
     var maskFile = new XMLHttpRequest();
@@ -55,7 +55,7 @@ ClassExample.prototype.draw = function (camera) {
         if (this.mMask) {
             this.mMask.draw(camera);
         }
-         this.mTriangle.draw(camera);
+        // this.mTriangle.draw(camera);
          
         var angle = 30; 
         for(var d=0;d<360;d+=angle){

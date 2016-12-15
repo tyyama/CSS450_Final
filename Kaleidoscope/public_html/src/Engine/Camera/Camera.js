@@ -56,15 +56,16 @@ Camera.prototype.getVPMatrix = function (deg,flip) {
     if (deg !== undefined) {
         var r = deg * 3.1416 / 180.0;
         if(flip){
-            mat4.scale(m, m, [1, -1, 1]);
+            mat4.scale(m, m, [0.5, -0.5, 1]);
         }else{
-            mat4.scale(m, m, [-1, -1, 1]);
+            mat4.scale(m, m, [-0.5, -0.5, 1]);
         }
         mat4.rotateZ(m, m, r);
         mat4.multiply(m, m, this.mVPMatrix);
+        return m;
     }
-    // return this.mVPMatrix;
-    return m;
+    return this.mVPMatrix;
+    
 };
 // </editor-fold>
 // </editor-fold>
