@@ -77,4 +77,13 @@ myModule.controller('MainCtrl', function($scope) {
             $scope.mSmallView.setViewport([smallViewX, 0, smallViewWidth, smallViewHeight]);
         }
     };
+    
+    $scope.saveCanvasAsImage = function(){
+        var canvas = document.getElementById("GLCanvas");
+        var img = new Image();
+        img.src = cropDataURL(canvas.toDataURL(),0,0,window.innerWidth - $scope.mSidebar.clientWidth,window.innerHeight -  2 * $scope.mHeader.clientHeight);
+        
+        document.getElementById('hiddenDiv').innerHTML = '<a id="myLink" href="' + img.src + '" download = "Kaleidoscope">Save</a>';
+        document.getElementById("myLink").click();
+    };
 });

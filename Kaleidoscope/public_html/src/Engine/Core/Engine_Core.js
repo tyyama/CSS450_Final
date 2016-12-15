@@ -31,7 +31,7 @@ gEngine.Core = (function () {
 
         // Get the standard or experimental webgl and binds to the Canvas area
         // store the results to the instance variable mGL
-        mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        mGL = canvas.getContext("experimental-webgl", {preserveDrawingBuffer: true});
 
         if (mGL === null) {
             document.write("<br><b>WebGL is not supported!</b>");
