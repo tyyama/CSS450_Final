@@ -10,8 +10,8 @@ angular.module('SliderModule', [])
             return {
                 template: `
                     <p>{{mLabel}}:</p> 
-                    <input type="range" min="{{mMin}}" max="{{mMax}}" step=".1" ng-model="mValue">
-                    <input type="text" ng-model="mValue">
+                    <input type="range" min="{{mMin}}" max="{{mMax}}" step=".1" ng-model="mTmp">
+                    <input type="text" ng-model="mTmp">
                 `,
         
                 scope: {
@@ -22,7 +22,18 @@ angular.module('SliderModule', [])
                 },
                 
                 controller: function($scope) {
+                    $scope.mTmp = 0;
                     
+                    $scope.$watch("mValue", function(newValue, oldValue) {
+                        $scope.mTmp = $scope.mValue;
+                    });
+                    
+                    $scope.$watch("mTmp", function(newValue, oldValue) {
+                        var f = parseFloat($scope.mTmp);
+                        
+                        if (f)
+                            $scope.mValue = $scope.mTmp;
+                    });
                 },
                 compile: function(element, attrs) {
                     if (!attrs.mMin) attrs.mMin = 0;
