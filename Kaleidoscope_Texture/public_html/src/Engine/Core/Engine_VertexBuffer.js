@@ -23,6 +23,10 @@ gEngine.VertexBuffer = (function () {
     
     var mTriangleVertexBuffer = null;
     var mTriangleTextureCoordBuffer = null;
+    
+    var mFrameBuffer = null;
+    var mFrameTexture = null;
+    var mRenderBuffer = null;
 
     // First: define the vertices for a square
     var verticesOfSquare = [
@@ -72,19 +76,52 @@ gEngine.VertexBuffer = (function () {
         mTriangleTextureCoordBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, mTriangleTextureCoordBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleTextureCoordinates), gl.STATIC_DRAW);
+    
+        mFrameBuffer = gl.createFramebuffer();
+        gl.bindFramebuffer(gl.FRAMEBUFFER, mFrameBuffer);
+        mFrameBuffer.width = 512;
+        mFrameBuffer.height = 512;
+        
+        mFrameTexture = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, mFrameTexture);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.generateMipmap(gl.TEXTURE_2D);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, mFrameBuffer.width, mFrameBuffer.height,
+                        0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+                        
+        mRenderBuffer = gl.createRenderbuffer();
+        gl.bindRenderbuffer(gl.RENDERBUFFER, mRenderBuffer);
+        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16,
+                                mFrameBuffer.width, mFrameBuffer.height);
+                                
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0,
+                                gl.TEXTURE_2D, mFrameTexture, 0);
+        gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT,
+                                    gl.RENDERBUFFER, mRenderBuffer);
+                                    
+        gl.bindTexture(gl.TEXTURE_2D, null);
+        gl.bindRenderbuffer(gl.RENDERBUFFER, null);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     };
 
     var getSquareVertexRef = function () { return mSquareVertexBuffer; };
     var getSquareTexCoordRef = function () { return mSquareTextureCoordBuffer; };
     var getTriangleVertexRef = function () { return mTriangleVertexBuffer; };
     var getTriangleTexCoordRef = function () { return mTriangleTextureCoordBuffer; };
+    var getFrameBuffer = function () { return mFrameBuffer; };
+    var getTextureBuffer = function () { return mFrameTexture; };
+    var getRenderBuffer = function () { return mRenderBuffer; };
 
     var mPublic = {
         initialize: initialize,
         getSquareVertexRef: getSquareVertexRef,
         getSquareTexCoordRef: getSquareTexCoordRef,
         getTriangleVertexRef: getTriangleVertexRef,
-        getTriangleTexCoordRef: getTriangleTexCoordRef
+        getTriangleTexCoordRef: getTriangleTexCoordRef,
+        getFrameBuffer: getFrameBuffer,
+        getTextureBuffer: getTextureBuffer,
+        getRenderBuffer: getRenderBuffer
     };
 
     return mPublic;

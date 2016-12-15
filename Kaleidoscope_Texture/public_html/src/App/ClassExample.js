@@ -9,6 +9,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function ClassExample() {
+    this.mGL = gEngine.Core.getGL();
     
     this.mConstColorShader = new SimpleShader(
         "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
@@ -22,16 +23,13 @@ function ClassExample() {
         "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/TextureFS.glsl");    // Path to the simple FragmentShader
     
-    this.mCurrentObject = new SquareRenderable(this.mFileTextureShader);
+    this.mManipulator = new Manipulator(this.mConstColorShader);
+    this.mBody = new BodyWithArms(this.mConstColorShader);
+    
     this.mFileTexture = new FileTextureSupport("assets/test-pattern.jpg", true);
-    this.mCurrentObject.setFileTexture(this.mFileTexture);
-    this.mCurrentObject.setColor([1, 0.25, 0.25, 1]);
-
-    this.mCurrentObject.getXform().setPosition(0, 0);
-    this.mCurrentObject.getXform().setSize(1, 1);
     
     this.mAllObjects = [];
-    this.mAllObjects.push(this.mCurrentObject);
+    this.mAllObjects.push(this.mBody);
     
     this.mTriangles = [];
     this.generateTriangles();
@@ -70,7 +68,7 @@ ClassExample.prototype.generateTriangles = function () {
         xf.setPosition(x, y);
         xf.setRotationInDegree(angle - 90);
         
-        if (i % 2 == 0) {
+        if (i % 2 === 0) {
             xf.setSize(size, size * 2);
         } else {
             xf.setSize(-size, size * 2);
@@ -86,13 +84,23 @@ ClassExample.prototype.draw = function (camera) {
 
     // centre red square
     if (camera.getName() === "Editor") {
-        var i;
-        for (i=0; i<this.mAllObjects.length; i++)
+        for (var i=0; i<this.mAllObjects.length; i++)
             this.mAllObjects[i].draw(camera);
+        
+        this.mGL.bindFramebuffer(this.mGL.FRAMEBUFFER, gEngine.VertexBuffer.getFrameBuffer());
+        
+        for (var i=0; i<this.mAllObjects.length; i++)
+            this.mAllObjects[i].draw(camera);
+        
+        this.mGL.bindFramebuffer(this.mGL.FRAMEBUFFER, null);
+        
     } else if (camera.getName() === "View") {
+        
+        
         for (i = 0; i < this.mTriangles.length; i++) {
             this.mTriangles[i].draw(camera);
         }
+        
         
         if (this.mMask)
             this.mMask.draw(camera);
@@ -100,5 +108,5 @@ ClassExample.prototype.draw = function (camera) {
 };
 
 ClassExample.prototype.parentXform = function () {
-    return this.mCurrentObject.getXform();
+    return this.mBody.parentXform();
 };

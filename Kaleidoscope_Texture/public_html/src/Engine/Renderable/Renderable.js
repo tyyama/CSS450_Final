@@ -36,7 +36,6 @@ Renderable.prototype.setVertexColor = function (i, color) {
 };
 
 Renderable.prototype.setFileTexture = function (f) {
-    console.log(f);
     this.mFileTexture = f;
 };
 
