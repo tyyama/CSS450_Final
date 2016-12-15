@@ -79,7 +79,9 @@ and open the template in the editor.
                 <canvas id="GLCanvas"
                         width="600"
                         height="600"
-                        ng-mousedown="handleClick($event)">
+                        ng-mousedown="handleMove($event)"
+                        ng-mousemove="handleMove($event)"
+                        ng-mouseup="handleRelease($event)">
                     Your browser does not support the HTML5 canvas.
                 </canvas>           
             <!--</div>-->
@@ -98,11 +100,7 @@ and open the template in the editor.
                     </select>
                 </div>
                 <div class="small">
-<!--                    <canvas id="GLCanvas_Small"
-                            width="200"
-                            height="200">
-                        Your browser does not support the HTML5 canvas.
-                    </canvas>-->
+                    <!-- placeholder to clear a space on top of the small viewport -->
                 </div>
             </aside>
         </div>
