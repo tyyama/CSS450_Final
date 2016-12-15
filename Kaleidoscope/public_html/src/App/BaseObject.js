@@ -8,7 +8,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function Spiky(shader) {
-    SceneNode.call(this, shader, "Base", false);
+    SceneNode.call(this, shader, "Base", false, true);
     
     this.mArmBase = new ArmSegment(shader, "ArmBase", 0, 1.4);
     this.addAsChild(this.mArmBase);

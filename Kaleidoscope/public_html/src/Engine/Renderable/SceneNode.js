@@ -10,7 +10,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 
-function SceneNode(shader, name, drawPivot) {
+function SceneNode(shader, name, drawPivot, drawSelfAboveChildren) {
     this.mName = name;
     this.mSet = [];
     this.mChildren = [];
@@ -29,6 +29,8 @@ function SceneNode(shader, name, drawPivot) {
         var xf = this.mPivotPos.getXform();
         xf.setSize(0.2, 0.2); // always this size
     }
+    
+    this.mDrawSelfAboveChildren = drawSelfAboveChildren || false;
 }
 SceneNode.prototype.setName = function (n) { this.mName = n; };
 SceneNode.prototype.getName = function () { return this.mName; };
@@ -110,13 +112,21 @@ SceneNode.prototype.draw = function (aCamera, parentMat, deg, flip) {
         mat4.multiply(xfMat, parentMat, xfMat);
     
     // Draw our own!
-    for (i = 0; i < this.mSet.length; i++) {
-        this.mSet[i].draw(aCamera, xfMat, deg, flip); // pass to each renderable
+    if (!this.mDrawSelfAboveChildren) {
+        for (i = 0; i < this.mSet.length; i++) {
+            this.mSet[i].draw(aCamera, xfMat, deg, flip); // pass to each renderable
+        }
     }
     
     // now draw the children
     for (i = 0; i < this.mChildren.length; i++) {
         this.mChildren[i].draw(aCamera, xfMat, deg, flip); // pass to each renderable
+    }
+    
+    if (this.mDrawSelfAboveChildren) {
+        for (i = 0; i < this.mSet.length; i++) {
+            this.mSet[i].draw(aCamera, xfMat, deg, flip); // pass to each renderable
+        }
     }
     
     // for debugging, let's draw the pivot position
@@ -141,4 +151,10 @@ SceneNode.prototype.getRotSpeed = function () { return this.mRotSpeed; };
 SceneNode.prototype.clearRotSpeed = function() { this.mRotSpeed = 0; };
 
 SceneNode.prototype.shouldRotate = function (rot) { this.mShouldRotate = rot; };
+SceneNode.prototype.pauseAll = function() {
+    this.mShouldRotate = false;
+    
+    for (var i = 0; i < this.mChildren.length; i++)
+        this.mChildren[i].pauseAll();
+};
 SceneNode.prototype.isRotating = function () { return this.mShouldRotate; };

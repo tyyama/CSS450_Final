@@ -28,7 +28,8 @@ myModule.controller('MainCtrl', function($scope) {
     
     $scope.reflections = $scope.reflect[3];
     
-    $scope.mSelectedObject = $scope.mMyWorld.getCurrentObject();//new PivotedTransform();
+    $scope.mBaseObject = $scope.mMyWorld.getCurrentObject();
+    $scope.mSelectedObject = $scope.mBaseObject;//new PivotedTransform();
     console.log($scope.mSelectedObject);
     $scope.mSelectedXform = $scope.mSelectedObject.getXform();
     $scope.mSelectedRotSpeed = $scope.mSelectedObject.getRotSpeed();
@@ -161,11 +162,14 @@ myModule.controller('MainCtrl', function($scope) {
     };
     
     $scope.clearRotation = function() {
-        console.log("RAN");
         $scope.mSelectedObject.clearRotSpeed();
         $scope.mSelectedRotSpeed = $scope.mSelectedObject.getRotSpeed();
         $scope.mShouldUpdate = true;
     };
+    
+    $scope.pauseAll = function() {
+        $scope.mBaseObject.pauseAll();
+    }
     
     $scope.handleResize($scope.mLargeView, $scope.mSmallView);
 });
