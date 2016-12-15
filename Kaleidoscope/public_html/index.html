@@ -87,6 +87,14 @@ and open the template in the editor.
             <aside id="sidebar">
                 <div class="controls">
                     <xform model="mSelectedXform"></xform>
+                    
+                    # of reflections
+                    <select ng-init="12" ng-model="reflections">
+                        <option>6</option>
+                        <option>8</option>
+                        <option>12</option>
+                        <option value=18>18</option>
+                    </select>
                 </div>
                 <div class="small">
 <!--                    <canvas id="GLCanvas_Small"

@@ -16,6 +16,8 @@ myModule.controller('MainCtrl', function($scope) {
     $scope.mCanvasMouse = new CanvasMouseSupport('GLCanvas');
     $scope.mCanvas = document.getElementById('GLCanvas');
     
+    $scope.reflections = 12;
+    
     $scope.mSelectedXform = $scope.mMyWorld.parentXform();//new PivotedTransform();
 //    $scope.mSelectedXform.setSize(4, 2);
     
@@ -34,7 +36,7 @@ myModule.controller('MainCtrl', function($scope) {
     $scope.mainTimerHandler = function() {
         gEngine.Core.clearCanvas([.05, .05, .05, 1]);
         
-        $scope.mMyWorld.draw($scope.mLargeView);
+        $scope.mMyWorld.draw($scope.mLargeView,parseInt($scope.reflections));
         $scope.mMyWorld.draw($scope.mSmallView);
     };
     

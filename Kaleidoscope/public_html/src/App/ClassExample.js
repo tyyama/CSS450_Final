@@ -43,7 +43,7 @@ function ClassExample() {
 }
 
 
-ClassExample.prototype.draw = function (camera) {
+ClassExample.prototype.draw = function (camera,reflections) {
     // Step F: Starts the drawing by activating the camera
     camera.setupViewProjection();
     var cameraName = camera.getName();
@@ -57,7 +57,7 @@ ClassExample.prototype.draw = function (camera) {
         }
         // this.mTriangle.draw(camera);
          
-        var angle = 30; 
+        var angle = 360/reflections; 
         for(var d=0;d<360;d+=angle){
             this.mBody.draw(camera,undefined,d-angle,(d/angle)%2 === 0);
         }
