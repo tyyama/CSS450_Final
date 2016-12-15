@@ -32,8 +32,9 @@ function ClassExample() {
         if (maskFile.readyState === 4 && (maskFile.status === 200 || maskFile.status === 0)) {
             this.mMask = new MeshRenderable(this.mConstColorShader, maskFile.responseText);
             this.mMask.setColor([.05, .05, .05, 1]);
-            this.mMask.getXform().setPosition(0, 0);
-            this.mMask.getXform().setSize(10, 10);
+            this.mMask.getXform().setSize(10.1, 10.1);
+            this.mMask.getXform().setPosition(-0.02, 0);
+            
         }
     }.bind(this);
     maskFile.send(null);
