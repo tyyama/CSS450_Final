@@ -169,7 +169,8 @@ myModule.controller('MainCtrl', function($scope) {
     
     $scope.pauseAll = function() {
         $scope.mBaseObject.pauseAll();
-    }
+        $scope.mShouldUpdate = true;
+    };
     
     $scope.handleResize($scope.mLargeView, $scope.mSmallView);
 });
