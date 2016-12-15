@@ -56,6 +56,11 @@ ClassExample.prototype.draw = function (camera) {
             this.mMask.draw(camera);
         }
          this.mTriangle.draw(camera);
+         
+        var angle = 30; 
+        for(var d=0;d<360;d+=angle){
+            this.mBody.draw(camera,undefined,d-angle,(d/angle)%2 === 0);
+        }
     }
 
 };

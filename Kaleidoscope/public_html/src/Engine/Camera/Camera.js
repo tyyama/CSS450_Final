@@ -51,8 +51,20 @@ Camera.prototype.setBackgroundColor = function (newColor) { this.mBgColor = newC
 Camera.prototype.getBackgroundColor = function () { return this.mBgColor; };
 
 // Getter for the View-Projection transform operator
-Camera.prototype.getVPMatrix = function () {
-    return this.mVPMatrix;
+Camera.prototype.getVPMatrix = function (deg,flip) {
+    var m = mat4.create();
+    if (deg !== undefined) {
+        var r = deg * 3.1416 / 180.0;
+        if(flip){
+            mat4.scale(m, m, [1, -1, 1]);
+        }else{
+            mat4.scale(m, m, [-1, -1, 1]);
+        }
+        mat4.rotateZ(m, m, r);
+        mat4.multiply(m, m, this.mVPMatrix);
+    }
+    // return this.mVPMatrix;
+    return m;
 };
 // </editor-fold>
 // </editor-fold>

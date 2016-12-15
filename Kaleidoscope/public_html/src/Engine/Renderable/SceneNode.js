@@ -88,7 +88,7 @@ SceneNode.prototype.setManipulator = function(mani) {
     }
 };
 
-SceneNode.prototype.draw = function (aCamera, parentMat) {
+SceneNode.prototype.draw = function (aCamera, parentMat, deg, flip) {
     var i;
     var xfMat = this.mXform.getXform();
     if (parentMat !== undefined)
@@ -96,12 +96,12 @@ SceneNode.prototype.draw = function (aCamera, parentMat) {
     
     // Draw our own!
     for (i = 0; i < this.mSet.length; i++) {
-        this.mSet[i].draw(aCamera, xfMat); // pass to each renderable
+        this.mSet[i].draw(aCamera, xfMat, deg, flip); // pass to each renderable
     }
     
     // now draw the children
     for (i = 0; i < this.mChildren.length; i++) {
-        this.mChildren[i].draw(aCamera, xfMat); // pass to each renderable
+        this.mChildren[i].draw(aCamera, xfMat, deg, flip); // pass to each renderable
     }
     
     // for debugging, let's draw the pivot position
@@ -111,7 +111,7 @@ SceneNode.prototype.draw = function (aCamera, parentMat) {
         var p = pxf.getPivot();
         var xf = this.mPivotPos.getXform();
         xf.setPosition(p[0] + t[0], p[1] + t[1]);
-        this.mPivotPos.draw(aCamera, parentMat);
+        this.mPivotPos.draw(aCamera, parentMat, deg, flip);
     }
     
     if (this.mManipulator !== null) {
