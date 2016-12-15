@@ -18,13 +18,15 @@ myModule.controller('MainCtrl', function($scope) {
     
     
     $scope.reflect = [
+      {num: '4'},
       {num: '6'},
       {num: '8'},
       {num: '12'},
-      {num: '18'}
+      {num: '18'},
+      {num: '24'}
     ];
     
-    $scope.reflections = $scope.reflect[0];
+    $scope.reflections = $scope.reflect[3];
     
     $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();//new PivotedTransform();
 //    $scope.mSelectedXform.setSize(4, 2);
