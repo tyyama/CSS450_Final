@@ -28,8 +28,11 @@ myModule.controller('MainCtrl', function($scope) {
     
     $scope.reflections = $scope.reflect[3];
     
-    $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();//new PivotedTransform();
-    $scope.mShouldUpdate = false;
+    $scope.mSelectedObject = $scope.mMyWorld.getCurrentObject();//new PivotedTransform();
+    console.log($scope.mSelectedObject);
+    $scope.mSelectedXform = $scope.mSelectedObject.getXform();
+    $scope.mSelectedRotSpeed = $scope.mSelectedObject.getRotSpeed();
+    $scope.mShouldUpdate = true;
 //    $scope.mSelectedXform.setSize(4, 2);
     
     $scope.mLargeView = new Camera(
@@ -54,6 +57,8 @@ myModule.controller('MainCtrl', function($scope) {
         
         $scope.mMyWorld.draw($scope.mLargeView,parseInt($scope.reflections.num));
         $scope.mMyWorld.draw($scope.mSmallView);
+        
+        $scope.mShouldUpdate = true;
     };
     
     $scope.handleMove = function(event) {
@@ -68,7 +73,10 @@ myModule.controller('MainCtrl', function($scope) {
                 $scope.mMyWorld.detectMouseOver($scope.mLastWCPosX,
                                                 $scope.mLastWCPosY);
 //                console.log($scope.mMyWorld.getCurrentXform());
-                $scope.mSelectedXform = $scope.mMyWorld.getCurrentXform();
+                $scope.mSelectedObject = $scope.mMyWorld.getCurrentObject();//new PivotedTransform();
+                $scope.mSelectedXform = $scope.mSelectedObject.getXform();
+                $scope.mSelectedRotSpeed = $scope.mSelectedObject.getRotSpeed();
+                
                 $scope.mShouldUpdate = true;
             }
         }
@@ -136,6 +144,24 @@ myModule.controller('MainCtrl', function($scope) {
         
         document.getElementById('hiddenDiv').innerHTML = '<a id="canvasDownload" href="' + img.src + '" download = "Kaleidoscope">Save</a>';
         document.getElementById("canvasDownload").click();
+    };
+    
+    $scope.$watch('mSelectedRotSpeed', function (newValue, oldValue) {
+        $scope.mSelectedObject.setRotSpeed(newValue);
+    });
+    
+    $scope.pauseRotation = function() {
+        $scope.mSelectedObject.shouldRotate(false);
+    };
+    
+    $scope.playRotation = function() {
+        $scope.mSelectedObject.shouldRotate(true);
+    };
+    
+    $scope.clearRotation = function() {
+        console.log("RAN");
+        $scope.mSelectedObject.clearRotSpeed();
+        $scope.mSelectedRotSpeed = $scope.mSelectedObject.getRotSpeed();
     };
     
     $scope.handleResize($scope.mLargeView, $scope.mSmallView);

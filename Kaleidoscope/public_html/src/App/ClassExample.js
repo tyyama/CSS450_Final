@@ -39,7 +39,7 @@ function ClassExample() {
     }.bind(this);
     maskFile.send(null);
     
-    this.mCurrentXform = this.mBody.parentXform();
+    this.mCurrentObject = this.mBody;
 }
 
 
@@ -64,8 +64,8 @@ ClassExample.prototype.draw = function (camera,reflections) {
 
 };
 
-ClassExample.prototype.getCurrentXform = function () {
-    return this.mCurrentXform;
+ClassExample.prototype.getCurrentObject = function () {
+    return this.mCurrentObject;
 };
 
 // *** GLOBAL funciton for bound checking ...

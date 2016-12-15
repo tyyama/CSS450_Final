@@ -16,6 +16,9 @@ function SceneNode(shader, name, drawPivot) {
     this.mChildren = [];
     this.mXform = new PivotedTransform();
     
+    this.mShouldRotate = false;
+    this.mRotSpeed = 0;
+    
     this.mManipulator = null;
 
     // this is for debugging only: for drawing the pivot position
@@ -91,6 +94,15 @@ SceneNode.prototype.setManipulator = function(mani) {
 SceneNode.prototype.draw = function (aCamera, parentMat, deg, flip) {
     var i;
     var xfMat = this.mXform.getXform();
+    
+    if (this.mShouldRotate) {
+        var rot = this.mXform.getRotationInDegree();
+        rot += this.mRotSpeed * 0.05;
+        rot %= 360;
+        if (rot < -180) rot += 360;
+        this.mXform.setRotationInDegree(rot);   
+    }
+    
     if (parentMat !== undefined)
         mat4.multiply(xfMat, parentMat, xfMat);
     
@@ -120,3 +132,10 @@ SceneNode.prototype.draw = function (aCamera, parentMat, deg, flip) {
         this.mManipulator.draw(aCamera, xfMat);
     }
 };
+
+SceneNode.prototype.setRotSpeed = function (speed) { this.mRotSpeed = speed; };
+SceneNode.prototype.getRotSpeed = function () { return this.mRotSpeed; };
+SceneNode.prototype.clearRotSpeed = function() { this.mRotSpeed = 0; };
+
+SceneNode.prototype.shouldRotate = function (rot) { this.mShouldRotate = rot; };
+SceneNode.prototype.isRotating = function () { return this.mShouldRotate; };

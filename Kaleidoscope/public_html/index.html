@@ -97,7 +97,7 @@ and open the template in the editor.
                     # of reflections
                     <select ng-model="reflections" ng-options="reflection.num for reflection in reflect"></select>
                     
-                    <br>&nbsp;&nbsp;&nbsp;
+                    <br><br>&nbsp;&nbsp;&nbsp;
                     <button ng-click="swapViews()">
                         Swap Views
                     </button>
@@ -115,7 +115,27 @@ and open the template in the editor.
                     </button>
                     <div id="hiddenDiv" hidden></div>
                     
+                    <br><br><hr><br>
+                    <slider label="Rot Anim"
+                            value="mSelectedRotSpeed"
+                            min="-10"
+                            max="10">
+                    </slider>
                     
+                    <br>&nbsp;&nbsp;&nbsp;
+                    <button ng-click="pauseRotation()"
+                            ng-show="mSelectedObject.isRotating()">
+                        Pause Rotation
+                    </button>
+                    
+                    <button ng-click="playRotation()"
+                            ng-show="!mSelectedObject.isRotating()">
+                        Play Rotation
+                    </button>
+                    
+                    <button ng-click="clearRotation()">
+                        Clear Rotation Speed
+                    </button>
                 </div>
                 <div class="small">
                     <!-- placeholder to clear a space on top of the small viewport -->

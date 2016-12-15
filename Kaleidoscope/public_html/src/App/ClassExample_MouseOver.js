@@ -36,7 +36,7 @@ ClassExample.prototype.detectMouseOver = function (wcX, wcY) {
         if (!once) {
             this.mManipulator.setXformMatrix(null, null);
         } else {
-            this.mCurrentXform = this.mManipulator.mSceneNode.getXform();
+            this.mCurrentObject = this.mManipulator.mSceneNode;
 //            console.log(this.mCurrentXform);
         }
      }
